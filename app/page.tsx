@@ -152,10 +152,108 @@ const steps = [
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
+const FUNCTIONS_URL = 'https://us-central1-school-connect-enterprise.cloudfunctions.net/requestAccess';
+
+function RequestAccessModal({ onClose }: { onClose: () => void }) {
+  const [form, setForm] = useState({ school_name: '', contact_name: '', contact_email: '', phone: '', message: '' });
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [errorMsg, setErrorMsg] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('submitting');
+    setErrorMsg('');
+    try {
+      const res = await fetch(FUNCTIONS_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setErrorMsg(data.error || 'Something went wrong. Please try again.');
+        setStatus('error');
+      } else {
+        setStatus('success');
+      }
+    } catch {
+      setErrorMsg('Network error. Please check your connection and try again.');
+      setStatus('error');
+    }
+  };
+
+  const inputStyle: React.CSSProperties = {
+    width: '100%', padding: '10px 14px', borderRadius: 8,
+    border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.06)',
+    color: '#fff', fontSize: 14, outline: 'none', fontFamily: 'inherit',
+  };
+  const labelStyle: React.CSSProperties = { display: 'block', fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.55)', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.06em' };
+
+  return (
+    <div
+      onClick={onClose}
+      style={{ position: 'fixed', inset: 0, background: 'rgba(4,47,46,0.85)', backdropFilter: 'blur(8px)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}
+    >
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{ background: 'linear-gradient(135deg, #042F2E 0%, #0a4a44 100%)', borderRadius: 20, padding: '40px 36px', maxWidth: 480, width: '100%', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 32px 80px rgba(0,0,0,0.5)', position: 'relative' }}
+      >
+        <button onClick={onClose} style={{ position: 'absolute', top: 16, right: 16, background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', cursor: 'pointer', fontSize: 22, lineHeight: 1 }}>×</button>
+
+        {status === 'success' ? (
+          <div style={{ textAlign: 'center', padding: '24px 0' }}>
+            <div style={{ fontSize: 48, marginBottom: 16 }}>✅</div>
+            <h3 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 24, color: '#fff', marginBottom: 12 }}>Request Submitted!</h3>
+            <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 15, lineHeight: 1.6, marginBottom: 24 }}>
+              We received your request and will be in touch within 24 hours. Check your inbox for a confirmation email.
+            </p>
+            <button onClick={onClose} style={{ background: '#0D9488', color: '#fff', border: 'none', borderRadius: 10, padding: '12px 28px', fontSize: 15, fontWeight: 600, cursor: 'pointer' }}>Done</button>
+          </div>
+        ) : (
+          <>
+            <h3 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 24, color: '#fff', marginBottom: 6 }}>Request Beta Access</h3>
+            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 14, marginBottom: 28 }}>Free for beta schools. We'll review and get back to you within 24 hours.</p>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <div>
+                <label style={labelStyle}>School Name *</label>
+                <input required style={inputStyle} placeholder="St. Mary's Primary School" value={form.school_name} onChange={e => setForm(f => ({ ...f, school_name: e.target.value }))} />
+              </div>
+              <div>
+                <label style={labelStyle}>Your Name *</label>
+                <input required style={inputStyle} placeholder="Principal Jane Smith" value={form.contact_name} onChange={e => setForm(f => ({ ...f, contact_name: e.target.value }))} />
+              </div>
+              <div>
+                <label style={labelStyle}>Work Email *</label>
+                <input required type="email" style={inputStyle} placeholder="principal@school.edu" value={form.contact_email} onChange={e => setForm(f => ({ ...f, contact_email: e.target.value }))} />
+              </div>
+              <div>
+                <label style={labelStyle}>Phone (optional)</label>
+                <input style={inputStyle} placeholder="+1 (555) 000-0000" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
+              </div>
+              <div>
+                <label style={labelStyle}>How did you hear about us? (optional)</label>
+                <textarea rows={2} style={{ ...inputStyle, resize: 'vertical' }} placeholder="Word of mouth, social media, etc." value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} />
+              </div>
+              {status === 'error' && (
+                <p style={{ color: '#FCA5A5', fontSize: 13, padding: '10px 14px', background: 'rgba(220,38,38,0.15)', borderRadius: 8, border: '1px solid rgba(220,38,38,0.3)' }}>{errorMsg}</p>
+              )}
+              <button type="submit" disabled={status === 'submitting'} style={{ background: status === 'submitting' ? 'rgba(13,148,136,0.5)' : '#0D9488', color: '#fff', border: 'none', borderRadius: 10, padding: '13px 0', fontSize: 15, fontWeight: 700, cursor: status === 'submitting' ? 'not-allowed' : 'pointer', marginTop: 4 }}>
+                {status === 'submitting' ? 'Submitting…' : 'Request Access →'}
+              </button>
+              <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', textAlign: 'center' }}>No credit card required. Beta is free.</p>
+            </form>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function LandingPage() {
   const [scrolled, setScrolled] = useState(false);
   const [activePersona, setActivePersona] = useState(0);
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -182,6 +280,7 @@ export default function LandingPage() {
 
   return (
     <>
+      {showModal && <RequestAccessModal onClose={() => setShowModal(false)} />}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
@@ -382,12 +481,24 @@ export default function LandingPage() {
 
         {/* ────────────────────── NAV ────────────────────────────── */}
         <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? 'nav-dark' : ''}`}>
-          <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', height: 72, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', height: 120, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 
             {/* Logo */}
-            <a href="#" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-              <img src="/logo.png" alt="SkoConnect" style={{ width: 36, height: 36, borderRadius: 9, objectFit: 'cover' }} />
-              <span style={{ color: '#fff', fontWeight: 700, fontSize: 18, letterSpacing: '-0.02em' }}>SkoConnect</span>
+            <a href="#" style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none' }}>
+              <div style={{
+                width: 96, height: 96, borderRadius: '50%',
+                overflow: 'hidden', flexShrink: 0,
+                border: '2px solid rgba(45,212,191,0.35)',
+                boxShadow: '0 0 0 4px rgba(45,212,191,0.1), 0 0 24px rgba(20,184,166,0.25)',
+                background: '#042F2E',
+              }}>
+                <img src="/logo.png" alt="SkoConnect" style={{
+                  width: '100%', height: '100%',
+                  objectFit: 'cover',
+                  display: 'block',
+                }} />
+              </div>
+              <span style={{ color: '#fff', fontWeight: 700, fontSize: 26, letterSpacing: '-0.02em' }}>SkoConnect</span>
             </a>
 
             {/* Links (desktop) */}
@@ -404,9 +515,9 @@ export default function LandingPage() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
               <a href="https://admin.skoconnect.com/login" style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14, fontWeight: 500, textDecoration: 'none' }}
                 className="hidden sm:block">Sign In</a>
-              <a href="mailto:hello@skoconnect.app" className="btn-teal" style={{ padding: '10px 20px', borderRadius: 10, fontSize: 14, fontWeight: 600, color: '#fff', textDecoration: 'none', display: 'inline-block' }}>
+              <button onClick={() => setShowModal(true)} className="btn-teal" style={{ padding: '10px 20px', borderRadius: 10, fontSize: 14, fontWeight: 600, color: '#fff', background: '#0D9488', border: 'none', cursor: 'pointer', display: 'inline-block' }}>
                 <span>Request Access →</span>
-              </a>
+              </button>
             </div>
           </div>
         </nav>
@@ -448,9 +559,9 @@ export default function LandingPage() {
 
                 {/* CTAs */}
                 <div className="h-r3" style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginBottom: 36 }}>
-                  <a href="mailto:hello@skoconnect.app" className="btn-teal" style={{ padding: '14px 28px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', textDecoration: 'none', display: 'inline-block' }}>
+                  <button onClick={() => setShowModal(true)} className="btn-teal" style={{ padding: '14px 28px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', background: '#0D9488', border: 'none', cursor: 'pointer', display: 'inline-block' }}>
                     <span>Request Access — Free</span>
-                  </a>
+                  </button>
                   <a href="https://admin.skoconnect.com/login" className="btn-ghost-white" style={{ padding: '14px 28px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', textDecoration: 'none', display: 'inline-block' }}>
                     Sign In →
                   </a>
@@ -706,9 +817,9 @@ export default function LandingPage() {
             </div>
 
             <div style={{ textAlign: 'center', marginTop: 56 }}>
-              <a href="mailto:hello@skoconnect.app" className="btn-teal" style={{ display: 'inline-block', padding: '15px 32px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', textDecoration: 'none' }}>
+              <button onClick={() => setShowModal(true)} className="btn-teal" style={{ display: 'inline-block', padding: '15px 32px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', background: '#0D9488', border: 'none', cursor: 'pointer' }}>
                 <span>Request Access →</span>
-              </a>
+              </button>
             </div>
           </div>
         </section>
@@ -797,17 +908,17 @@ export default function LandingPage() {
               Join the beta today — completely free for all schools during the beta period. No credit card required.
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center', marginBottom: 28 }}>
-              <a href="mailto:hello@skoconnect.app" className="btn-teal" style={{ display: 'inline-block', padding: '15px 32px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', textDecoration: 'none', boxShadow: '0 4px 32px rgba(20,184,166,0.4)' }}>
+              <button onClick={() => setShowModal(true)} className="btn-teal" style={{ display: 'inline-block', padding: '15px 32px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', background: '#0D9488', border: 'none', cursor: 'pointer', boxShadow: '0 4px 32px rgba(20,184,166,0.4)' }}>
                 <span>Request Access — Free</span>
-              </a>
-              <a href="mailto:hello@skoconnect.app" className="btn-ghost-white" style={{ display: 'inline-block', padding: '15px 32px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', textDecoration: 'none' }}>
+              </button>
+              <button onClick={() => setShowModal(true)} className="btn-ghost-white" style={{ display: 'inline-block', padding: '15px 32px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', background: 'transparent', border: '1px solid rgba(255,255,255,0.3)', cursor: 'pointer' }}>
                 Request a Demo
-              </a>
+              </button>
             </div>
             <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: 13 }}>
               Questions?{' '}
-              <a href="mailto:hello@skoconnect.app" style={{ color: 'rgba(255,255,255,0.55)', textDecoration: 'underline' }}>
-                hello@skoconnect.app
+              <a href="mailto:support.skoconnect@agentmail.to" style={{ color: 'rgba(255,255,255,0.55)', textDecoration: 'underline' }}>
+                support.skoconnect@agentmail.to
               </a>
             </p>
           </div>
@@ -855,7 +966,7 @@ export default function LandingPage() {
                   {[
                     { label: 'About', href: 'https://admin.skoconnect.com/about' },
                     { label: 'Blog', href: '#' },
-                    { label: 'Contact', href: 'mailto:hello@skoconnect.app' },
+                    { label: 'Contact', href: 'mailto:support.skoconnect@agentmail.to' },
                     { label: 'Privacy Policy', href: 'https://admin.skoconnect.com/privacy' },
                     { label: 'Terms', href: 'https://admin.skoconnect.com/terms' },
                   ].map(l => (
