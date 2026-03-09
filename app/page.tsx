@@ -1,0 +1,905 @@
+'use client';
+/* eslint-disable @next/next/no-img-element, react/no-unescaped-entities */
+
+import { useState, useEffect } from 'react';
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
+
+const features = [
+  {
+    icon: '📢',
+    title: 'Real-Time Announcements',
+    description: 'Push critical updates instantly. Emergency alerts reach every parent, teacher, and student in seconds — not hours.',
+    tag: 'Core',
+    large: true,
+  },
+  {
+    icon: '📋',
+    title: 'Digital Forms & Submissions',
+    description: 'Replace paper with smart digital forms. Track responses, send reminders, and export data automatically.',
+    tag: 'Forms 2.0',
+    large: false,
+  },
+  {
+    icon: '📅',
+    title: 'Event Management',
+    description: 'Schedule events, manage RSVPs, and send automated reminders at configurable intervals before each event.',
+    large: false,
+  },
+  {
+    icon: '🚨',
+    title: 'Emergency Broadcast',
+    description: 'One-click mass alert with mandatory acknowledgment tracking. Know exactly who has seen critical messages.',
+    tag: 'Critical',
+    large: true,
+  },
+  {
+    icon: '👨‍👩‍👧‍👦',
+    title: 'Family Onboarding',
+    description: 'Enroll entire families via CSV upload or a guided enrollment wizard. Get parents connected in minutes.',
+    large: false,
+  },
+  {
+    icon: '📱',
+    title: 'Native Mobile Apps',
+    description: 'iOS and Android apps for parents and teachers. Push notifications keep everyone in the loop, always.',
+    large: false,
+  },
+];
+
+const personas = [
+  {
+    role: 'School Administrators',
+    emoji: '🏫',
+    tagline: 'Manage your school with clarity and control',
+    benefits: [
+      'Onboard entire families via CSV in under 5 minutes',
+      'One-click emergency broadcasts with read receipts',
+      'Real-time analytics on engagement and form responses',
+      'Role-based access control for every staff member',
+    ],
+    accent: '#14B8A6',
+    bg: '#F0FDFA',
+  },
+  {
+    role: 'Teachers',
+    emoji: '👨‍🏫',
+    tagline: 'Focus on teaching, not administration',
+    benefits: [
+      'Send targeted notices to your class in seconds',
+      'Create and distribute digital forms effortlessly',
+      'Track event RSVPs and form submissions live',
+      'Direct push notifications to parents via mobile app',
+    ],
+    accent: '#F59E0B',
+    bg: '#FFFBEB',
+  },
+  {
+    role: 'Parents',
+    emoji: '👨‍👩‍👧',
+    tagline: 'Stay connected to your child\'s school life',
+    benefits: [
+      'Never miss an important announcement or event',
+      'Submit permission slips and consent forms digitally',
+      'Receive emergency alerts instantly on your phone',
+      'One app for all your children across any grade',
+    ],
+    accent: '#8B5CF6',
+    bg: '#F5F3FF',
+  },
+  {
+    role: 'School Staff',
+    emoji: '💼',
+    tagline: 'Stay aligned with the whole community',
+    benefits: [
+      'Access relevant notices and event updates instantly',
+      'Participate in school-wide emergency communications',
+      'Streamlined workflows for administrative tasks',
+      'Real-time visibility into form submission status',
+    ],
+    accent: '#EC4899',
+    bg: '#FDF2F8',
+  },
+];
+
+const testimonials = [
+  {
+    quote: 'SkoConnect replaced our chaotic WhatsApp group with a structured, reliable platform. Parents are more engaged and we spend far less time chasing form submissions.',
+    author: 'Sarah Johnson',
+    role: 'Principal',
+    school: 'Lincoln High School',
+    initials: 'SJ',
+    color: '#14B8A6',
+  },
+  {
+    quote: 'The emergency broadcast feature alone was worth the switch. During an unexpected lockdown drill, every parent received confirmation within 30 seconds.',
+    author: 'Michael Chen',
+    role: 'Vice Principal',
+    school: 'Jefferson Elementary',
+    initials: 'MC',
+    color: '#F59E0B',
+  },
+  {
+    quote: 'Digital forms have saved us hundreds of hours. No more chasing paper permission slips — we see submissions in real time and export everything instantly.',
+    author: 'Lisa Martinez',
+    role: 'School Administrator',
+    school: 'Westside Academy',
+    initials: 'LM',
+    color: '#8B5CF6',
+  },
+];
+
+const steps = [
+  {
+    num: '01',
+    title: 'Set Up Your School',
+    description: 'Create your school profile in minutes. Configure roles, invite staff, and customize your communication settings.',
+    icon: '🏫',
+  },
+  {
+    num: '02',
+    title: 'Enroll Your Community',
+    description: 'Import parents and students via CSV upload, or use the guided enrollment wizard. Everyone gets set up automatically.',
+    icon: '👥',
+  },
+  {
+    num: '03',
+    title: 'Start Communicating',
+    description: 'Send your first notice, create a digital form, schedule an event — your whole community is instantly connected.',
+    icon: '🚀',
+  },
+];
+
+// ─── Component ────────────────────────────────────────────────────────────────
+
+export default function LandingPage() {
+  const [scrolled, setScrolled] = useState(false);
+  const [activePersona, setActivePersona] = useState(0);
+  const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && entry.target.id) {
+            setVisibleSections(prev => new Set(Array.from(prev).concat(entry.target.id)));
+          }
+        });
+      },
+      { threshold: 0.08 }
+    );
+    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  const vis = (id: string) => visibleSections.has(id);
+
+  return (
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        .lp { font-family: 'Outfit', system-ui, sans-serif; color: #1C1917; overflow-x: hidden; }
+        .lp .serif { font-family: 'DM Serif Display', Georgia, serif; }
+
+        /* ── Hero gradient ── */
+        .hero-bg {
+          background: linear-gradient(145deg, #042F2E 0%, #0a4a44 35%, #0F766E 65%, #115E59 100%);
+          background-size: 300% 300%;
+          animation: bgShift 12s ease infinite;
+        }
+        @keyframes bgShift {
+          0%   { background-position: 0% 50%; }
+          50%  { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+
+        /* ── Grid overlay ── */
+        .grid-overlay {
+          background-image:
+            linear-gradient(rgba(20,184,166,0.07) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(20,184,166,0.07) 1px, transparent 1px);
+          background-size: 64px 64px;
+        }
+
+        /* ── Nav ── */
+        .nav-dark {
+          background: rgba(4,47,46,0.95);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border-bottom: 1px solid rgba(20,184,166,0.18);
+        }
+
+        /* ── Glow orbs ── */
+        .orb {
+          border-radius: 50%;
+          filter: blur(80px);
+          pointer-events: none;
+        }
+
+        /* ── Float animations ── */
+        @keyframes floatA {
+          0%,100% { transform: translateY(0) rotate(2deg); }
+          50%      { transform: translateY(-10px) rotate(2deg); }
+        }
+        @keyframes floatB {
+          0%,100% { transform: translateY(-5px) rotate(-2.5deg); }
+          50%      { transform: translateY(7px) rotate(-2.5deg); }
+        }
+        @keyframes floatC {
+          0%,100% { transform: translateY(0) rotate(1.5deg); }
+          50%      { transform: translateY(-12px) rotate(1.5deg); }
+        }
+        @keyframes floatD {
+          0%,100% { transform: translateY(-3px) rotate(-1deg); }
+          50%      { transform: translateY(5px) rotate(-1deg); }
+        }
+        .fa { animation: floatA 4.2s ease-in-out infinite; }
+        .fb { animation: floatB 5.1s ease-in-out infinite; }
+        .fc { animation: floatC 6s ease-in-out 0.8s infinite; }
+        .fd { animation: floatD 4.8s ease-in-out 0.4s infinite; }
+
+        /* ── Hero reveal ── */
+        @keyframes heroReveal {
+          from { opacity: 0; transform: translateY(28px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .h-r0 { animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s both; }
+        .h-r1 { animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s both; }
+        .h-r2 { animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.4s both; }
+        .h-r3 { animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.55s both; }
+        .h-r4 { animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.7s both; }
+
+        /* ── Section reveal ── */
+        .s-hide { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .s-show { opacity: 1 !important; transform: translateY(0) !important; }
+
+        /* ── Notification cards ── */
+        .notif {
+          background: rgba(255,255,255,0.97);
+          border: 1px solid rgba(255,255,255,0.5);
+          border-radius: 18px;
+          box-shadow: 0 8px 40px rgba(0,0,0,0.22), 0 2px 8px rgba(0,0,0,0.1);
+          backdrop-filter: blur(12px);
+          padding: 14px 16px;
+        }
+
+        /* ── Gradient text ── */
+        .teal-text {
+          background: linear-gradient(130deg, #2DD4BF 0%, #5EEAD4 100%);
+          -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        .gold-text {
+          background: linear-gradient(130deg, #F59E0B 0%, #FDE68A 100%);
+          -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        /* ── Buttons ── */
+        .btn-teal {
+          background: linear-gradient(135deg, #14B8A6, #0D9488);
+          position: relative; overflow: hidden;
+          transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .btn-teal::after {
+          content: '';
+          position: absolute; inset: 0;
+          background: linear-gradient(135deg, #2DD4BF, #14B8A6);
+          opacity: 0; transition: opacity 0.2s ease;
+        }
+        .btn-teal:hover { transform: translateY(-1px); box-shadow: 0 8px 32px rgba(20,184,166,0.4); }
+        .btn-teal:hover::after { opacity: 1; }
+        .btn-teal span { position: relative; z-index: 1; }
+
+        .btn-ghost-white {
+          border: 1.5px solid rgba(255,255,255,0.28);
+          transition: all 0.2s ease;
+        }
+        .btn-ghost-white:hover {
+          border-color: rgba(255,255,255,0.65);
+          background: rgba(255,255,255,0.08);
+        }
+
+        /* ── Feature cards ── */
+        .feat-card {
+          background: #fff;
+          border: 1px solid #E8E8E0;
+          border-radius: 22px;
+          padding: 30px;
+          transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+          position: relative; overflow: hidden;
+        }
+        .feat-card::before {
+          content: '';
+          position: absolute; top: 0; left: 0; right: 0; height: 3px;
+          background: linear-gradient(90deg, #14B8A6, #5EEAD4);
+          transform: scaleX(0); transform-origin: left;
+          transition: transform 0.3s ease;
+        }
+        .feat-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(20,184,166,0.1), 0 4px 16px rgba(0,0,0,0.04); border-color: #99F6E4; }
+        .feat-card:hover::before { transform: scaleX(1); }
+        .feat-large { grid-column: span 2; }
+        @media (max-width: 767px) { .feat-large { grid-column: span 1; } }
+
+        /* ── Persona tab ── */
+        .p-tab {
+          padding: 9px 18px; border-radius: 100px;
+          font-size: 14px; font-weight: 500;
+          cursor: pointer; white-space: nowrap;
+          border: 1.5px solid transparent;
+          transition: all 0.2s ease;
+          font-family: 'Outfit', sans-serif;
+        }
+        .p-tab-on  { background: #042F2E; color: #fff; border-color: #042F2E; }
+        .p-tab-off { background: #fff; color: #57534E; border-color: #E8E8E0; }
+        .p-tab-off:hover { border-color: #14B8A6; color: #0F766E; }
+
+        /* ── Testimonial cards ── */
+        .t-card {
+          background: #fff; border: 1px solid #E8E8E0; border-radius: 22px; padding: 32px;
+          transition: transform 0.22s ease, box-shadow 0.22s ease;
+        }
+        .t-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(20,184,166,0.08); }
+
+        /* ── Step number watermark ── */
+        .step-wm {
+          font-family: 'DM Serif Display', Georgia, serif;
+          font-size: 100px; line-height: 1;
+          color: rgba(20,184,166,0.1);
+          position: absolute; top: -16px; left: -8px;
+          pointer-events: none; user-select: none;
+        }
+
+        /* ── Pulse dot ── */
+        @keyframes pulseDot {
+          0%,100% { box-shadow: 0 0 0 0 rgba(20,184,166,0.4); }
+          50%      { box-shadow: 0 0 0 6px rgba(20,184,166,0); }
+        }
+        .pulse-dot { animation: pulseDot 2s ease-in-out infinite; }
+
+        /* ── Scroll indicator ── */
+        @keyframes scrollBob {
+          0%,100% { transform: translateY(0); opacity: 0.8; }
+          50%      { transform: translateY(6px); opacity: 0.4; }
+        }
+        .scroll-bob { animation: scrollBob 1.8s ease-in-out infinite; }
+
+        /* ── Progress bar ── */
+        .progress-bar { height: 6px; border-radius: 3px; background: #E8E8E0; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #14B8A6, #5EEAD4); border-radius: 3px; }
+      `}</style>
+
+      <div className="lp">
+
+        {/* ────────────────────── NAV ────────────────────────────── */}
+        <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? 'nav-dark' : ''}`}>
+          <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', height: 72, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+
+            {/* Logo */}
+            <a href="#" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
+              <img src="/logo.png" alt="SkoConnect" style={{ width: 36, height: 36, borderRadius: 9, objectFit: 'cover' }} />
+              <span style={{ color: '#fff', fontWeight: 700, fontSize: 18, letterSpacing: '-0.02em' }}>SkoConnect</span>
+            </a>
+
+            {/* Links (desktop) */}
+            <div style={{ display: 'flex', gap: 32 }} className="hidden md:flex">
+              {['#features', '#for-schools', '#how-it-works', '#testimonials'].map((href, i) => (
+                <a key={href} href={href} style={{ color: 'rgba(255,255,255,0.65)', fontSize: 14, fontWeight: 500, textDecoration: 'none', transition: 'color 0.2s' }}
+                  onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.65)')}
+                >{['Features', 'For Schools', 'How It Works', 'Reviews'][i]}</a>
+              ))}
+            </div>
+
+            {/* CTA group */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <a href="https://admin.skoconnect.com/login" style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14, fontWeight: 500, textDecoration: 'none' }}
+                className="hidden sm:block">Sign In</a>
+              <a href="mailto:hello@skoconnect.app" className="btn-teal" style={{ padding: '10px 20px', borderRadius: 10, fontSize: 14, fontWeight: 600, color: '#fff', textDecoration: 'none', display: 'inline-block' }}>
+                <span>Request Access →</span>
+              </a>
+            </div>
+          </div>
+        </nav>
+
+        {/* ────────────────────── HERO ───────────────────────────── */}
+        <section className="hero-bg" style={{ minHeight: '100vh', position: 'relative', display: 'flex', alignItems: 'center', paddingTop: 80, paddingBottom: 64, overflow: 'hidden' }}>
+
+          {/* Grid overlay */}
+          <div className="grid-overlay" style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }} />
+
+          {/* Glow orbs */}
+          <div className="orb" style={{ position: 'absolute', top: '-10%', right: '-5%', width: 500, height: 500, background: 'rgba(20,184,166,0.12)' }} />
+          <div className="orb" style={{ position: 'absolute', bottom: '5%', left: '-8%', width: 400, height: 400, background: 'rgba(245,158,11,0.07)' }} />
+          <div className="orb" style={{ position: 'absolute', top: '40%', left: '30%', width: 300, height: 300, background: 'rgba(20,184,166,0.06)' }} />
+
+          <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', width: '100%', position: 'relative', zIndex: 2 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}
+              className="hero-grid" >
+
+              {/* LEFT: Copy */}
+              <div>
+                {/* Beta badge */}
+                <div className="h-r0" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(20,184,166,0.15)', border: '1px solid rgba(20,184,166,0.3)', borderRadius: 100, padding: '7px 16px', marginBottom: 32 }}>
+                  <span className="pulse-dot" style={{ width: 8, height: 8, borderRadius: '50%', background: '#2DD4BF', display: 'inline-block' }} />
+                  <span style={{ color: '#99F6E4', fontSize: 13, fontWeight: 500 }}>Now in Beta · Free for all schools</span>
+                </div>
+
+                {/* Headline */}
+                <h1 className="serif h-r1" style={{ fontSize: 'clamp(2.8rem,5vw,4.4rem)', lineHeight: 1.08, letterSpacing: '-0.025em', color: '#fff', marginBottom: 24 }}>
+                  School<br/>
+                  Communication,{' '}
+                  <em className="teal-text" style={{ fontStyle: 'italic' }}>Elevated.</em>
+                </h1>
+
+                {/* Sub */}
+                <p className="h-r2" style={{ color: 'rgba(255,255,255,0.65)', fontSize: 18, lineHeight: 1.65, maxWidth: 460, marginBottom: 36 }}>
+                  Real-time announcements, digital forms, emergency broadcasts, and smart event management — unified in one platform built for the modern school community.
+                </p>
+
+                {/* CTAs */}
+                <div className="h-r3" style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginBottom: 36 }}>
+                  <a href="mailto:hello@skoconnect.app" className="btn-teal" style={{ padding: '14px 28px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', textDecoration: 'none', display: 'inline-block' }}>
+                    <span>Request Access — Free</span>
+                  </a>
+                  <a href="https://admin.skoconnect.com/login" className="btn-ghost-white" style={{ padding: '14px 28px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', textDecoration: 'none', display: 'inline-block' }}>
+                    Sign In →
+                  </a>
+                </div>
+
+                {/* Trust pills */}
+                <div className="h-r4" style={{ display: 'flex', flexWrap: 'wrap', gap: 20 }}>
+                  {['🔒 Enterprise Security', '⚡ 99.9% Uptime', '📱 Mobile Apps', '✓ Free Beta'].map(p => (
+                    <span key={p} style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13, fontWeight: 500 }}>{p}</span>
+                  ))}
+                </div>
+              </div>
+
+              {/* RIGHT: Floating cards */}
+              <div style={{ position: 'relative', height: 540 }} className="hidden lg:block">
+
+                {/* Decorative dot grid */}
+                <div style={{ position: 'absolute', top: 0, left: 0, opacity: 0.25 }}>
+                  <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+                    {Array.from({ length: 25 }, (_, i) => (
+                      <circle key={i} cx={(i % 5) * 24 + 8} cy={Math.floor(i / 5) * 24 + 8} r="2.5" fill="#2DD4BF"/>
+                    ))}
+                  </svg>
+                </div>
+
+                {/* Card 1: Announcement */}
+                <div className="notif fa" style={{ position: 'absolute', top: 60, right: 24, width: 260 }}>
+                  <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                    <div style={{ width: 36, height: 36, borderRadius: 10, background: '#F0FDFA', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: 18 }}>📢</div>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
+                        <span style={{ fontSize: 10, fontWeight: 700, color: '#0F766E', textTransform: 'uppercase', letterSpacing: '0.06em' }}>New Notice</span>
+                        <span style={{ fontSize: 10, color: '#A8A29E' }}>just now</span>
+                      </div>
+                      <p style={{ fontSize: 13, fontWeight: 600, color: '#1C1917', marginBottom: 2 }}>Parent-Teacher Meetings</p>
+                      <p style={{ fontSize: 12, color: '#78716C' }}>Tomorrow, 3:00 PM · All classrooms</p>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 8 }}>
+                        <div style={{ display: 'flex' }}>
+                          {['#14B8A6','#F59E0B','#8B5CF6'].map((c,i) => (
+                            <div key={i} style={{ width: 20, height: 20, borderRadius: '50%', background: c, border: '2px solid white', marginLeft: i > 0 ? -6 : 0 }} />
+                          ))}
+                        </div>
+                        <span style={{ fontSize: 11, color: '#A8A29E' }}>+24 confirmed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Card 2: Form responses */}
+                <div className="notif fb" style={{ position: 'absolute', top: 210, right: 0, width: 248 }}>
+                  <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                    <div style={{ width: 36, height: 36, borderRadius: 10, background: '#FFFBEB', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: 18 }}>📋</div>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ fontSize: 10, fontWeight: 700, color: '#B45309', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 2 }}>Form Responses</div>
+                      <p style={{ fontSize: 13, fontWeight: 600, color: '#1C1917', marginBottom: 8 }}>Permission Slip 2026</p>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 4 }}>
+                        <span style={{ color: '#78716C' }}>47 of 52 submitted</span>
+                        <span style={{ fontWeight: 700, color: '#14B8A6' }}>90%</span>
+                      </div>
+                      <div className="progress-bar">
+                        <div className="progress-fill" style={{ width: '90%' }} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Card 3: Event */}
+                <div className="notif fc" style={{ position: 'absolute', bottom: 80, right: 28, width: 252 }}>
+                  <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                    <div style={{ width: 36, height: 36, borderRadius: 10, background: '#F5F3FF', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: 18 }}>📅</div>
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
+                        <span style={{ fontSize: 10, fontWeight: 700, color: '#6D28D9', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Upcoming Event</span>
+                        <span style={{ fontSize: 10, color: '#A8A29E' }}>3 days</span>
+                      </div>
+                      <p style={{ fontSize: 13, fontWeight: 600, color: '#1C1917', marginBottom: 2 }}>Annual Sports Day</p>
+                      <p style={{ fontSize: 12, color: '#78716C', marginBottom: 6 }}>March 15 · School Grounds</p>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: '#F0FDF4', color: '#166534', fontSize: 11, fontWeight: 600, padding: '3px 8px', borderRadius: 100 }}>
+                        ✓ 38 RSVPs
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Card 4: Emergency (accent) */}
+                <div className="notif fd" style={{ position: 'absolute', top: 390, left: 20, width: 210, background: '#FFF1F2', borderColor: '#FECDD3' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <span style={{ fontSize: 22 }}>🚨</span>
+                    <div>
+                      <p style={{ fontSize: 12, fontWeight: 700, color: '#BE123C' }}>Emergency Broadcast</p>
+                      <p style={{ fontSize: 11, color: '#E11D48', marginTop: 1 }}>Delivered to 247 contacts</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            {/* Scroll indicator */}
+            <div style={{ position: 'absolute', bottom: -24, left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, opacity: 0.45 }}>
+              <span style={{ color: '#fff', fontSize: 10, letterSpacing: '0.15em', textTransform: 'uppercase' }}>Scroll</span>
+              <div className="scroll-bob" style={{ width: 22, height: 34, border: '1.5px solid rgba(255,255,255,0.35)', borderRadius: 11, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: 5 }}>
+                <div style={{ width: 4, height: 7, background: 'rgba(255,255,255,0.6)', borderRadius: 2 }} />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ────────────────────── STATS BAR ──────────────────────── */}
+        <section id="stats" data-animate className={`s-hide ${vis('stats') ? 's-show' : ''}`}
+          style={{ background: '#fff', borderTop: '1px solid #E8E8E0', borderBottom: '1px solid #E8E8E0', padding: '52px 24px' }}>
+          <div style={{ maxWidth: 900, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 32, textAlign: 'center' }}>
+            {[
+              { num: '500+',  label: 'Schools Onboarded', color: '#14B8A6' },
+              { num: '50K+',  label: 'Active Users',       color: '#F59E0B' },
+              { num: '99.9%', label: 'Platform Uptime',    color: '#8B5CF6' },
+              { num: '4.9★',  label: 'App Store Rating',   color: '#EC4899' },
+            ].map(s => (
+              <div key={s.label}>
+                <div style={{ fontFamily: 'Outfit,sans-serif', fontWeight: 800, fontSize: '2.8rem', lineHeight: 1, letterSpacing: '-0.04em', color: s.color, marginBottom: 6 }}>{s.num}</div>
+                <div style={{ fontSize: 13, color: '#78716C', fontWeight: 500 }}>{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ────────────────────── FEATURES ───────────────────────── */}
+        <section id="features" data-animate className={`s-hide ${vis('features') ? 's-show' : ''}`}
+          style={{ padding: '96px 24px', background: '#FAFAF8' }}>
+          <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+
+            <div style={{ textAlign: 'center', marginBottom: 64 }}>
+              <div style={{ display: 'inline-block', padding: '6px 16px', borderRadius: 100, background: '#F0FDFA', border: '1px solid #CCFBF1', color: '#0F766E', fontSize: 13, fontWeight: 600, marginBottom: 16 }}>
+                Everything You Need
+              </div>
+              <h2 className="serif" style={{ fontSize: 'clamp(2rem,3.5vw,3rem)', lineHeight: 1.18, letterSpacing: '-0.025em', color: '#1C1917', marginBottom: 16 }}>
+                Built for modern schools
+              </h2>
+              <p style={{ color: '#78716C', fontSize: 17, lineHeight: 1.6, maxWidth: 580, margin: '0 auto' }}>
+                Six core capabilities that replace fragmented tools, WhatsApp groups, and paper forms — unified in one platform.
+              </p>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 20 }}>
+              {features.map((f) => (
+                <div key={f.title} className={`feat-card${f.large ? ' feat-large' : ''}`}>
+                  {f.tag && (
+                    <span style={{ display: 'inline-block', fontSize: 11, fontWeight: 700, color: '#0F766E', background: '#F0FDFA', padding: '3px 10px', borderRadius: 100, marginBottom: 14, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+                      {f.tag}
+                    </span>
+                  )}
+                  <div style={{ fontSize: 40, marginBottom: 16 }}>{f.icon}</div>
+                  <h3 style={{ fontWeight: 700, fontSize: 18, color: '#1C1917', marginBottom: 10 }}>{f.title}</h3>
+                  <p style={{ fontSize: 14, color: '#78716C', lineHeight: 1.65 }}>{f.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ────────────────────── PERSONAS ───────────────────────── */}
+        <section id="for-schools" data-animate className={`s-hide ${vis('for-schools') ? 's-show' : ''}`}
+          style={{ padding: '96px 24px', background: '#fff' }}>
+          <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+
+            <div style={{ textAlign: 'center', marginBottom: 48 }}>
+              <div style={{ display: 'inline-block', padding: '6px 16px', borderRadius: 100, background: '#FFFBEB', border: '1px solid #FEF3C7', color: '#B45309', fontSize: 13, fontWeight: 600, marginBottom: 16 }}>
+                For Everyone
+              </div>
+              <h2 className="serif" style={{ fontSize: 'clamp(2rem,3.5vw,3rem)', lineHeight: 1.18, letterSpacing: '-0.025em', color: '#1C1917', marginBottom: 16 }}>
+                Built for your <em style={{ fontStyle: 'italic' }}>whole</em> community
+              </h2>
+              <p style={{ color: '#78716C', fontSize: 17, lineHeight: 1.6, maxWidth: 560, margin: '0 auto' }}>
+                One platform with distinct experiences for every role in your school ecosystem.
+              </p>
+            </div>
+
+            {/* Tabs */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 10, marginBottom: 40 }}>
+              {personas.map((p, i) => (
+                <button key={p.role} className={`p-tab ${activePersona === i ? 'p-tab-on' : 'p-tab-off'}`}
+                  onClick={() => setActivePersona(i)}>
+                  {p.emoji} {p.role}
+                </button>
+              ))}
+            </div>
+
+            {/* Active card */}
+            <div style={{ maxWidth: 860, margin: '0 auto', borderRadius: 24, overflow: 'hidden', border: `1.5px solid ${personas[activePersona].accent}35`, boxShadow: `0 8px 48px ${personas[activePersona].accent}20` }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+                <div style={{ padding: '44px 40px', background: '#fff' }}>
+                  <div style={{ fontSize: 52, marginBottom: 16 }}>{personas[activePersona].emoji}</div>
+                  <h3 className="serif" style={{ fontSize: 26, color: '#1C1917', marginBottom: 8 }}>{personas[activePersona].role}</h3>
+                  <p style={{ fontSize: 15, color: '#78716C', marginBottom: 32 }}>{personas[activePersona].tagline}</p>
+                  <a href="https://admin.skoconnect.com/login" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '11px 22px', borderRadius: 10, fontSize: 14, fontWeight: 600, color: '#fff', textDecoration: 'none', background: personas[activePersona].accent }}>
+                    Sign In →
+                  </a>
+                </div>
+                <div style={{ padding: '44px 40px', background: `${personas[activePersona].bg}` }}>
+                  <h4 style={{ fontSize: 11, fontWeight: 700, color: '#A8A29E', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 24 }}>Key Benefits</h4>
+                  <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 16 }}>
+                    {personas[activePersona].benefits.map((b, i) => (
+                      <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                        <div style={{ width: 20, height: 20, borderRadius: '50%', background: personas[activePersona].accent, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>
+                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                            <path d="M2 5l2.5 2.5L8 3" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </div>
+                        <span style={{ fontSize: 14, color: '#57534E', lineHeight: 1.55 }}>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ────────────────────── HOW IT WORKS ───────────────────── */}
+        <section id="how-it-works" data-animate className={`s-hide ${vis('how-it-works') ? 's-show' : ''}`}
+          style={{ padding: '96px 24px', background: '#FAFAF8' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+
+            <div style={{ textAlign: 'center', marginBottom: 72 }}>
+              <div style={{ display: 'inline-block', padding: '6px 16px', borderRadius: 100, background: '#F0FDFA', border: '1px solid #CCFBF1', color: '#0F766E', fontSize: 13, fontWeight: 600, marginBottom: 16 }}>
+                Simple Setup
+              </div>
+              <h2 className="serif" style={{ fontSize: 'clamp(2rem,3.5vw,3rem)', lineHeight: 1.18, letterSpacing: '-0.025em', color: '#1C1917', marginBottom: 16 }}>
+                Up and running in 3 steps
+              </h2>
+              <p style={{ color: '#78716C', fontSize: 17, lineHeight: 1.6, maxWidth: 480, margin: '0 auto' }}>
+                No IT department required. Schools are live the same day.
+              </p>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 40, position: 'relative' }}>
+
+              {/* Connecting line */}
+              <div style={{ position: 'absolute', top: 52, left: '16.66%', right: '16.66%', height: 1, background: 'linear-gradient(90deg,#CCFBF1,#99F6E4,#CCFBF1)', zIndex: 0 }} className="hidden md:block" />
+
+              {steps.map((step, i) => (
+                <div key={step.num} style={{ position: 'relative', zIndex: 1 }}>
+                  <div className="step-wm">{step.num}</div>
+                  <div style={{ position: 'relative', paddingTop: 16 }}>
+                    <div style={{ width: 48, height: 48, borderRadius: 14, background: i === 0 ? '#042F2E' : i === 1 ? '#0F766E' : '#14B8A6', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, marginBottom: 24, boxShadow: '0 4px 16px rgba(20,184,166,0.25)' }}>
+                      {step.icon}
+                    </div>
+                    <h3 style={{ fontWeight: 700, fontSize: 20, color: '#1C1917', marginBottom: 12 }}>{step.title}</h3>
+                    <p style={{ fontSize: 14, color: '#78716C', lineHeight: 1.65 }}>{step.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ textAlign: 'center', marginTop: 56 }}>
+              <a href="mailto:hello@skoconnect.app" className="btn-teal" style={{ display: 'inline-block', padding: '15px 32px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', textDecoration: 'none' }}>
+                <span>Request Access →</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* ────────────────────── TESTIMONIALS ───────────────────── */}
+        <section id="testimonials" data-animate className={`s-hide ${vis('testimonials') ? 's-show' : ''}`}
+          style={{ padding: '96px 24px', background: '#fff' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+
+            <div style={{ textAlign: 'center', marginBottom: 64 }}>
+              <div style={{ display: 'inline-block', padding: '6px 16px', borderRadius: 100, background: '#FFFBEB', border: '1px solid #FEF3C7', color: '#B45309', fontSize: 13, fontWeight: 600, marginBottom: 16 }}>
+                School Stories
+              </div>
+              <h2 className="serif" style={{ fontSize: 'clamp(2rem,3.5vw,3rem)', lineHeight: 1.18, letterSpacing: '-0.025em', color: '#1C1917' }}>
+                What schools are saying
+              </h2>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 20 }}>
+              {testimonials.map(t => (
+                <div key={t.author} className="t-card">
+                  {/* Stars */}
+                  <div style={{ display: 'flex', gap: 2, marginBottom: 20 }}>
+                    {[0,1,2,3,4].map(n => (
+                      <svg key={n} width="16" height="16" viewBox="0 0 16 16" fill="#F59E0B">
+                        <path d="M8 1.5l1.545 3.13 3.455.5-2.5 2.437.59 3.44L8 9.373l-3.09 1.634.59-3.44L3 4.13l3.455-.5L8 1.5z"/>
+                      </svg>
+                    ))}
+                  </div>
+                  {/* Quote */}
+                  <p style={{ fontSize: 14, color: '#57534E', lineHeight: 1.7, fontStyle: 'italic', marginBottom: 24 }}>"{t.quote}"</p>
+                  {/* Author */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                    <div style={{ width: 40, height: 40, borderRadius: '50%', background: `linear-gradient(135deg,${t.color}88,${t.color})`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <span style={{ color: '#fff', fontSize: 12, fontWeight: 700 }}>{t.initials}</span>
+                    </div>
+                    <div>
+                      <p style={{ fontWeight: 600, fontSize: 14, color: '#1C1917' }}>{t.author}</p>
+                      <p style={{ fontSize: 12, color: '#A8A29E' }}>{t.role} · {t.school}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ────────────────────── TRUST SIGNALS ──────────────────── */}
+        <section id="trust" data-animate className={`s-hide ${vis('trust') ? 's-show' : ''}`}
+          style={{ padding: '64px 24px', background: '#FAFAF8', borderTop: '1px solid #E8E8E0', borderBottom: '1px solid #E8E8E0' }}>
+          <div style={{ maxWidth: 900, margin: '0 auto' }}>
+            <p style={{ textAlign: 'center', fontSize: 11, fontWeight: 700, color: '#D6D3D1', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: 40 }}>
+              Enterprise-grade infrastructure
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 24 }}>
+              {[
+                { icon: '☁️', title: 'Google Firebase', sub: 'Cloud infrastructure' },
+                { icon: '🔒', title: 'SSL Encrypted',   sub: 'End-to-end security' },
+                { icon: '📱', title: 'Native Mobile',   sub: 'iOS & Android apps' },
+                { icon: '⚡', title: '99.9% Uptime',    sub: 'SLA guaranteed' },
+              ].map(item => (
+                <div key={item.title} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <div style={{ width: 44, height: 44, borderRadius: 12, background: '#fff', border: '1px solid #E8E8E0', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, flexShrink: 0, boxShadow: '0 1px 4px rgba(28,25,23,0.04)' }}>
+                    {item.icon}
+                  </div>
+                  <div>
+                    <p style={{ fontWeight: 600, fontSize: 13, color: '#44403C' }}>{item.title}</p>
+                    <p style={{ fontSize: 12, color: '#A8A29E' }}>{item.sub}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ────────────────────── FINAL CTA ──────────────────────── */}
+        <section className="hero-bg" style={{ padding: '112px 24px', position: 'relative', overflow: 'hidden' }}>
+          <div className="orb" style={{ position: 'absolute', top: '-20%', left: '20%', width: 480, height: 480, background: 'rgba(20,184,166,0.12)' }} />
+          <div className="orb" style={{ position: 'absolute', bottom: '-10%', right: '15%', width: 400, height: 400, background: 'rgba(245,158,11,0.08)' }} />
+
+          <div style={{ maxWidth: 680, margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 2 }}>
+            <h2 className="serif" style={{ fontSize: 'clamp(2.2rem,4vw,3.6rem)', lineHeight: 1.12, letterSpacing: '-0.025em', color: '#fff', marginBottom: 20 }}>
+              Ready to transform your school?
+            </h2>
+            <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 18, lineHeight: 1.6, marginBottom: 44, maxWidth: 480, margin: '0 auto 44px' }}>
+              Join the beta today — completely free for all schools during the beta period. No credit card required.
+            </p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center', marginBottom: 28 }}>
+              <a href="mailto:hello@skoconnect.app" className="btn-teal" style={{ display: 'inline-block', padding: '15px 32px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', textDecoration: 'none', boxShadow: '0 4px 32px rgba(20,184,166,0.4)' }}>
+                <span>Request Access — Free</span>
+              </a>
+              <a href="mailto:hello@skoconnect.app" className="btn-ghost-white" style={{ display: 'inline-block', padding: '15px 32px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', textDecoration: 'none' }}>
+                Request a Demo
+              </a>
+            </div>
+            <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: 13 }}>
+              Questions?{' '}
+              <a href="mailto:hello@skoconnect.app" style={{ color: 'rgba(255,255,255,0.55)', textDecoration: 'underline' }}>
+                hello@skoconnect.app
+              </a>
+            </p>
+          </div>
+        </section>
+
+        {/* ────────────────────── FOOTER ─────────────────────────── */}
+        <footer style={{ background: '#0C0A09', padding: '56px 24px 32px' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: 48, marginBottom: 48 }}>
+
+              {/* Brand */}
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+                  <img src="/logo.png" alt="SkoConnect" style={{ width: 32, height: 32, borderRadius: 8, objectFit: 'cover' }} />
+                  <span style={{ color: '#fff', fontWeight: 700, fontSize: 17 }}>SkoConnect</span>
+                </div>
+                <p style={{ color: '#57534E', fontSize: 14, lineHeight: 1.65, maxWidth: 300 }}>
+                  Transforming school communication with real-time announcements, digital forms, and smart notifications for the modern school community.
+                </p>
+              </div>
+
+              {/* Product */}
+              <div>
+                <h4 style={{ color: '#fff', fontWeight: 600, fontSize: 13, marginBottom: 18 }}>Product</h4>
+                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  {[
+                    { label: 'Features', href: '#features' },
+                    { label: 'For Schools', href: '#for-schools' },
+                    { label: 'Mobile Apps', href: '#features' },
+                    { label: 'Security', href: 'https://admin.skoconnect.com/security' },
+                    { label: 'Pricing', href: '#' },
+                  ].map(l => (
+                    <li key={l.label}><a href={l.href} style={{ color: '#57534E', fontSize: 14, textDecoration: 'none', transition: 'color 0.2s' }}
+                      onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+                      onMouseLeave={e => (e.currentTarget.style.color = '#57534E')}
+                    >{l.label}</a></li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Company */}
+              <div>
+                <h4 style={{ color: '#fff', fontWeight: 600, fontSize: 13, marginBottom: 18 }}>Company</h4>
+                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  {[
+                    { label: 'About', href: 'https://admin.skoconnect.com/about' },
+                    { label: 'Blog', href: '#' },
+                    { label: 'Contact', href: 'mailto:hello@skoconnect.app' },
+                    { label: 'Privacy Policy', href: 'https://admin.skoconnect.com/privacy' },
+                    { label: 'Terms', href: 'https://admin.skoconnect.com/terms' },
+                  ].map(l => (
+                    <li key={l.label}><a href={l.href} style={{ color: '#57534E', fontSize: 14, textDecoration: 'none', transition: 'color 0.2s' }}
+                      onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+                      onMouseLeave={e => (e.currentTarget.style.color = '#57534E')}
+                    >{l.label}</a></li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div style={{ borderTop: '1px solid #1C1917', paddingTop: 24, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
+              <p style={{ color: '#44403C', fontSize: 13 }}>© 2026 SkoConnect. All rights reserved.</p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span style={{ color: '#44403C', fontSize: 12 }}>Built on Google Firebase</span>
+                <span style={{ color: '#44403C' }}>·</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, color: '#14B8A6' }}>
+                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#14B8A6', display: 'inline-block', animation: 'pulseDot 2s ease-in-out infinite' }} />
+                  All systems operational
+                </span>
+              </div>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+
+      {/* Responsive overrides */}
+      <style>{`
+        @media (max-width: 1023px) {
+          .hero-grid { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 767px) {
+          section[style*="gridTemplateColumns: 'repeat(3"] > div,
+          section[style*="gridTemplateColumns: 'repeat(4"] > div {
+            grid-template-columns: 1fr 1fr !important;
+          }
+          .feat-large { grid-column: span 1 !important; }
+          footer [style*="grid-template-columns: '2fr 1fr 1fr'"] {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
+    </>
+  );
+}
