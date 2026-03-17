@@ -176,11 +176,11 @@ function RequestAccessModal({ onClose }: { onClose: () => void }) {
   return (
     <div
       onClick={onClose}
-      style={{ position: 'fixed', inset: 0, background: 'rgba(4,47,46,0.85)', backdropFilter: 'blur(8px)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}
+      style={{ position: 'fixed', inset: 0, background: 'rgba(4,47,46,0.85)', backdropFilter: 'blur(8px)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}
     >
       <div
         onClick={e => e.stopPropagation()}
-        style={{ background: 'linear-gradient(135deg, #042F2E 0%, #0a4a44 100%)', borderRadius: 20, padding: '40px 36px', maxWidth: 480, width: '100%', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 32px 80px rgba(0,0,0,0.5)', position: 'relative' }}
+        style={{ background: 'linear-gradient(135deg, #042F2E 0%, #0a4a44 100%)', borderRadius: 20, padding: '32px 24px', maxWidth: 480, width: '100%', maxHeight: '90vh', overflowY: 'auto', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 32px 80px rgba(0,0,0,0.5)', position: 'relative' }}
       >
         <button onClick={onClose} style={{ position: 'absolute', top: 16, right: 16, background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', cursor: 'pointer', fontSize: 22, lineHeight: 1 }}>×</button>
 
@@ -459,17 +459,121 @@ export default function LandingPage() {
         /* ── Progress bar ── */
         .progress-bar { height: 6px; border-radius: 3px; background: #E8E8E0; overflow: hidden; }
         .progress-fill { height: 100%; background: linear-gradient(90deg, #14B8A6, #5EEAD4); border-radius: 3px; }
+
+        .btn-teal,
+        .btn-ghost-white,
+        .p-tab {
+          min-height: 44px;
+        }
+
+        /* ── Responsive layout ── */
+        @media (max-width: 1023px) {
+          .lp-nav-inner {
+            height: 90px !important;
+            padding: 0 16px !important;
+          }
+          .lp-logo-mark {
+            width: 64px !important;
+            height: 64px !important;
+          }
+          .lp-logo-word {
+            font-size: 20px !important;
+          }
+          .hero-grid {
+            grid-template-columns: 1fr !important;
+            gap: 32px !important;
+          }
+          .hero-copy {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+          .hero-sub {
+            max-width: 620px !important;
+          }
+          .hero-scroll {
+            display: none !important;
+          }
+          .stats-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 24px !important;
+          }
+          .features-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .persona-card-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .how-grid {
+            grid-template-columns: 1fr !important;
+            gap: 28px !important;
+          }
+          .trust-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 16px !important;
+          }
+          .footer-grid {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 28px !important;
+          }
+        }
+
+        @media (max-width: 767px) {
+          .lp-nav-inner {
+            height: 82px !important;
+          }
+          .lp-logo-word {
+            font-size: 18px !important;
+          }
+          .hero-bg {
+            padding-top: 106px !important;
+          }
+          .hero-sub {
+            font-size: 16px !important;
+            line-height: 1.55 !important;
+          }
+          .hero-right {
+            display: none !important;
+          }
+          .stats-grid,
+          .features-grid,
+          .trust-grid,
+          .footer-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .persona-shell {
+            border-radius: 18px !important;
+          }
+          .final-cta-buttons {
+            flex-direction: column;
+            align-items: stretch;
+          }
+          .final-cta-buttons > * {
+            width: 100%;
+            justify-content: center;
+          }
+        }
+
+        @media (max-width: 479px) {
+          .lp-logo-word {
+            display: none;
+          }
+          .lp .serif {
+            text-wrap: balance;
+          }
+        }
       `}</style>
 
       <div className="lp">
 
         {/* ────────────────────── NAV ────────────────────────────── */}
         <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? 'nav-dark' : ''}`}>
-          <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', height: 120, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div className="lp-nav-inner" style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', height: 120, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 
             {/* Logo */}
             <a href="#" style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none' }}>
-              <div style={{
+              <div className="lp-logo-mark" style={{
                 width: 96, height: 96, borderRadius: '50%',
                 overflow: 'hidden', flexShrink: 0,
                 border: '2px solid rgba(45,212,191,0.35)',
@@ -482,7 +586,7 @@ export default function LandingPage() {
                   display: 'block',
                 }} />
               </div>
-              <span style={{ color: '#fff', fontWeight: 700, fontSize: 26, letterSpacing: '-0.02em' }}>SkoConnect</span>
+              <span className="lp-logo-word" style={{ color: '#fff', fontWeight: 700, fontSize: 26, letterSpacing: '-0.02em' }}>SkoConnect</span>
             </a>
 
             {/* Links (desktop) */}
@@ -522,7 +626,7 @@ export default function LandingPage() {
               className="hero-grid" >
 
               {/* LEFT: Copy */}
-              <div>
+              <div className="hero-copy">
                 {/* Beta badge */}
                 <div className="h-r0" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(20,184,166,0.15)', border: '1px solid rgba(20,184,166,0.3)', borderRadius: 100, padding: '7px 16px', marginBottom: 32 }}>
                   <span className="pulse-dot" style={{ width: 8, height: 8, borderRadius: '50%', background: '#2DD4BF', display: 'inline-block' }} />
@@ -537,7 +641,7 @@ export default function LandingPage() {
                 </h1>
 
                 {/* Sub */}
-                <p className="h-r2" style={{ color: 'rgba(255,255,255,0.65)', fontSize: 18, lineHeight: 1.65, maxWidth: 460, marginBottom: 36 }}>
+                <p className="h-r2 hero-sub" style={{ color: 'rgba(255,255,255,0.65)', fontSize: 18, lineHeight: 1.65, maxWidth: 460, marginBottom: 36 }}>
                   Real-time announcements, digital forms, emergency broadcasts, and smart event management — unified in one platform built for the modern school community.
                 </p>
 
@@ -560,7 +664,7 @@ export default function LandingPage() {
               </div>
 
               {/* RIGHT: Floating cards */}
-              <div style={{ position: 'relative', height: 540 }} className="hidden lg:block">
+              <div style={{ position: 'relative', height: 540 }} className="hero-right hidden lg:block">
 
                 {/* Decorative dot grid */}
                 <div style={{ position: 'absolute', top: 0, left: 0, opacity: 0.25 }}>
@@ -645,7 +749,7 @@ export default function LandingPage() {
             </div>
 
             {/* Scroll indicator */}
-            <div style={{ position: 'absolute', bottom: -24, left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, opacity: 0.45 }}>
+            <div className="hero-scroll" style={{ position: 'absolute', bottom: -24, left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, opacity: 0.45 }}>
               <span style={{ color: '#fff', fontSize: 10, letterSpacing: '0.15em', textTransform: 'uppercase' }}>Scroll</span>
               <div className="scroll-bob" style={{ width: 22, height: 34, border: '1.5px solid rgba(255,255,255,0.35)', borderRadius: 11, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: 5 }}>
                 <div style={{ width: 4, height: 7, background: 'rgba(255,255,255,0.6)', borderRadius: 2 }} />
@@ -657,7 +761,7 @@ export default function LandingPage() {
         {/* ────────────────────── STATS BAR ──────────────────────── */}
         <section id="stats" data-animate className={`s-hide ${vis('stats') ? 's-show' : ''}`}
           style={{ background: '#fff', borderTop: '1px solid #E8E8E0', borderBottom: '1px solid #E8E8E0', padding: '52px 24px' }}>
-          <div style={{ maxWidth: 900, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 32, textAlign: 'center' }}>
+          <div className="stats-grid" style={{ maxWidth: 900, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 32, textAlign: 'center' }}>
             {[
               { num: 'Beta',  label: 'Launching April 2026', color: '#14B8A6' },
               { num: '99.9%', label: 'Platform Uptime',      color: '#8B5CF6' },
@@ -689,7 +793,7 @@ export default function LandingPage() {
               </p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 20 }}>
+            <div className="features-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 20 }}>
               {features.map((f) => (
                 <div key={f.title} className={`feat-card${f.large ? ' feat-large' : ''}`}>
                   {f.tag && (
@@ -734,8 +838,8 @@ export default function LandingPage() {
             </div>
 
             {/* Active card */}
-            <div style={{ maxWidth: 860, margin: '0 auto', borderRadius: 24, overflow: 'hidden', border: `1.5px solid ${personas[activePersona].accent}35`, boxShadow: `0 8px 48px ${personas[activePersona].accent}20` }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+            <div className="persona-shell" style={{ maxWidth: 860, margin: '0 auto', borderRadius: 24, overflow: 'hidden', border: `1.5px solid ${personas[activePersona].accent}35`, boxShadow: `0 8px 48px ${personas[activePersona].accent}20` }}>
+              <div className="persona-card-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
                 <div style={{ padding: '44px 40px', background: '#fff' }}>
                   <div style={{ fontSize: 52, marginBottom: 16 }}>{personas[activePersona].emoji}</div>
                   <h3 className="serif" style={{ fontSize: 26, color: '#1C1917', marginBottom: 8 }}>{personas[activePersona].role}</h3>
@@ -781,7 +885,7 @@ export default function LandingPage() {
               </p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 40, position: 'relative' }}>
+            <div className="how-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 40, position: 'relative' }}>
 
               {/* Connecting line */}
               <div style={{ position: 'absolute', top: 52, left: '16.66%', right: '16.66%', height: 1, background: 'linear-gradient(90deg,#CCFBF1,#99F6E4,#CCFBF1)', zIndex: 0 }} className="hidden md:block" />
@@ -858,7 +962,7 @@ export default function LandingPage() {
             <p style={{ textAlign: 'center', fontSize: 11, fontWeight: 700, color: '#D6D3D1', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: 40 }}>
               Enterprise-grade infrastructure
             </p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 24 }}>
+            <div className="trust-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 24 }}>
               {[
                 { icon: '☁️', title: 'Google Firebase', sub: 'Cloud infrastructure' },
                 { icon: '🔒', title: 'SSL Encrypted',   sub: 'End-to-end security' },
@@ -891,7 +995,7 @@ export default function LandingPage() {
             <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 18, lineHeight: 1.6, marginBottom: 44, maxWidth: 480, margin: '0 auto 44px' }}>
               Join the beta today — completely free for all schools during the beta period. No credit card required.
             </p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center', marginBottom: 28 }}>
+            <div className="final-cta-buttons" style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center', marginBottom: 28 }}>
               <button onClick={() => setShowModal(true)} className="btn-teal" style={{ display: 'inline-block', padding: '15px 32px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', background: '#0D9488', border: 'none', cursor: 'pointer', boxShadow: '0 4px 32px rgba(20,184,166,0.4)' }}>
                 <span>Request Access — Free</span>
               </button>
@@ -911,7 +1015,7 @@ export default function LandingPage() {
         {/* ────────────────────── FOOTER ─────────────────────────── */}
         <footer style={{ background: '#0C0A09', padding: '56px 24px 32px' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: 48, marginBottom: 48 }}>
+            <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: 48, marginBottom: 48 }}>
 
               {/* Brand */}
               <div>
@@ -979,22 +1083,6 @@ export default function LandingPage() {
 
       </div>
 
-      {/* Responsive overrides */}
-      <style>{`
-        @media (max-width: 1023px) {
-          .hero-grid { grid-template-columns: 1fr !important; }
-        }
-        @media (max-width: 767px) {
-          section[style*="gridTemplateColumns: 'repeat(3"] > div,
-          section[style*="gridTemplateColumns: 'repeat(4"] > div {
-            grid-template-columns: 1fr 1fr !important;
-          }
-          .feat-large { grid-column: span 1 !important; }
-          footer [style*="grid-template-columns: '2fr 1fr 1fr'"] {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `}</style>
     </>
   );
 }
