@@ -104,28 +104,12 @@ const personas = [
 
 const testimonials = [
   {
-    quote: 'SkoConnect replaced our chaotic WhatsApp group with a structured, reliable platform. Parents are more engaged and we spend far less time chasing form submissions.',
-    author: 'Sarah Johnson',
-    role: 'Principal',
-    school: 'Lincoln High School',
-    initials: 'SJ',
+    quote: 'I built SkoConnect because schools need reliable communication that actually works. WhatsApp groups are chaotic, email gets buried, and paper forms get lost. Join our beta and help us build the future of school engagement.',
+    author: 'Andre Newsome',
+    role: 'Founder',
+    school: 'SkoConnect',
+    initials: 'AN',
     color: '#14B8A6',
-  },
-  {
-    quote: 'The emergency broadcast feature alone was worth the switch. During an unexpected lockdown drill, every parent received confirmation within 30 seconds.',
-    author: 'Michael Chen',
-    role: 'Vice Principal',
-    school: 'Jefferson Elementary',
-    initials: 'MC',
-    color: '#F59E0B',
-  },
-  {
-    quote: 'Digital forms have saved us hundreds of hours. No more chasing paper permission slips — we see submissions in real time and export everything instantly.',
-    author: 'Lisa Martinez',
-    role: 'School Administrator',
-    school: 'Westside Academy',
-    initials: 'LM',
-    color: '#8B5CF6',
   },
 ];
 
@@ -675,10 +659,10 @@ export default function LandingPage() {
           style={{ background: '#fff', borderTop: '1px solid #E8E8E0', borderBottom: '1px solid #E8E8E0', padding: '52px 24px' }}>
           <div style={{ maxWidth: 900, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 32, textAlign: 'center' }}>
             {[
-              { num: '500+',  label: 'Schools Onboarded', color: '#14B8A6' },
-              { num: '50K+',  label: 'Active Users',       color: '#F59E0B' },
-              { num: '99.9%', label: 'Platform Uptime',    color: '#8B5CF6' },
-              { num: '4.9★',  label: 'App Store Rating',   color: '#EC4899' },
+              { num: 'Beta',  label: 'Launching April 2026', color: '#14B8A6' },
+              { num: '99.9%', label: 'Platform Uptime',      color: '#8B5CF6' },
+              { num: '🔒',      label: 'Firebase Security',      color: '#14B8A6' },
+              { num: '📱',      label: 'iOS & Android Ready',   color: '#F59E0B' },
             ].map(s => (
               <div key={s.label}>
                 <div style={{ fontFamily: 'Outfit,sans-serif', fontWeight: 800, fontSize: '2.8rem', lineHeight: 1, letterSpacing: '-0.04em', color: s.color, marginBottom: 6 }}>{s.num}</div>
@@ -824,21 +808,21 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* ────────────────────── TESTIMONIALS ───────────────────── */}
+        {/* ────────────────────── FROM THE FOUNDER ───────────────────── */}
         <section id="testimonials" data-animate className={`s-hide ${vis('testimonials') ? 's-show' : ''}`}
           style={{ padding: '96px 24px', background: '#fff' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
 
             <div style={{ textAlign: 'center', marginBottom: 64 }}>
-              <div style={{ display: 'inline-block', padding: '6px 16px', borderRadius: 100, background: '#FFFBEB', border: '1px solid #FEF3C7', color: '#B45309', fontSize: 13, fontWeight: 600, marginBottom: 16 }}>
-                School Stories
+              <div style={{ display: 'inline-block', padding: '6px 16px', borderRadius: 100, background: '#F0FDFA', border: '1px solid #CCFBF1', color: '#0F766E', fontSize: 13, fontWeight: 600, marginBottom: 16 }}>
+                Founder's Vision
               </div>
               <h2 className="serif" style={{ fontSize: 'clamp(2rem,3.5vw,3rem)', lineHeight: 1.18, letterSpacing: '-0.025em', color: '#1C1917' }}>
-                What schools are saying
+                Why I built SkoConnect
               </h2>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 20 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 20, maxWidth: 720, margin: '0 auto' }}>
               {testimonials.map(t => (
                 <div key={t.author} className="t-card">
                   {/* Stars */}

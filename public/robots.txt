@@ -1,0 +1,14 @@
+# robots.txt for SkoConnect
+# Last updated: March 11, 2026
+
+User-agent: *
+Allow: /
+
+# Block admin and internal pages from indexing
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /static/
+
+# Sitemap location
+Sitemap: https://skoconnect.com/sitemap.xml
