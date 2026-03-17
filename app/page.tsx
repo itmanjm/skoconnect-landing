@@ -964,7 +964,7 @@ export default function LandingPage() {
             </p>
             <div className="trust-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 24 }}>
               {[
-                { icon: '☁️', title: 'Google Firebase', sub: 'Cloud infrastructure' },
+                { icon: '☁️', title: 'Google Cloud Firebase', sub: 'Secure cloud infrastructure' },
                 { icon: '🔒', title: 'SSL Encrypted',   sub: 'End-to-end security' },
                 { icon: '📱', title: 'Native Mobile',   sub: 'iOS & Android apps' },
                 { icon: '⚡', title: '99.9% Uptime',    sub: 'SLA guaranteed' },
@@ -1070,7 +1070,7 @@ export default function LandingPage() {
             <div style={{ borderTop: '1px solid #1C1917', paddingTop: 24, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
               <p style={{ color: '#44403C', fontSize: 13 }}>© 2026 SkoConnect. All rights reserved.</p>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span style={{ color: '#44403C', fontSize: 12 }}>Built on Google Firebase</span>
+                <span style={{ color: '#44403C', fontSize: 12 }}>Hosted on Google Cloud Firebase infrastructure</span>
                 <span style={{ color: '#44403C' }}>·</span>
                 <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, color: '#14B8A6' }}>
                   <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#14B8A6', display: 'inline-block', animation: 'pulseDot 2s ease-in-out infinite' }} />
