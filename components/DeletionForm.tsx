@@ -15,10 +15,9 @@ interface DeletionFormProps {
   successTimeline: string;
 }
 
-// TODO: Replace with actual Firebase Cloud Function URL when backend is wired.
-// The Cloud Function should accept POST with { type, email, timestamp }
-// and write to a Firestore collection such as `deletionRequests`.
-const DELETION_FUNCTION_URL = 'https://us-central1-school-connect-enterprise.cloudfunctions.net/submitDeletionRequest';
+// Cloud Function URL for deletion requests (Google Play compliance).
+// Firestore collection: deletionRequests — writes via Cloud Function with CORS.
+const DELETION_FUNCTION_URL = 'https://us-central1-school-connect-enterprise.cloudfunctions.net/deletionRequests';
 
 export default function DeletionForm({
   type,
@@ -58,8 +57,8 @@ export default function DeletionForm({
 
       setStatus('success');
     } catch {
-      // TODO: Remove localStorage fallback once Cloud Function is deployed.
-      // Store locally so the request is not lost if the endpoint isn't live yet.
+      // Graceful degradation: if the Cloud Function is unreachable (network error,
+      // CORS issue, or function not yet deployed), store locally so the request is not lost.
       try {
         const existing = JSON.parse(localStorage.getItem('skoconnect_deletion_requests') || '[]');
         existing.push(payload);
