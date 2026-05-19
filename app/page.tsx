@@ -104,7 +104,7 @@ const personas = [
 
 const testimonials = [
   {
-    quote: 'I built SkoConnect because schools need reliable communication that actually works. WhatsApp groups are chaotic, email gets buried, and paper forms get lost. Join our beta and help us build the future of school engagement.',
+    quote: 'I built SkoConnect because schools need reliable communication that actually works. WhatsApp groups are chaotic, email gets buried, and paper forms get lost. Join our pilot program and help us build the future of school engagement.',
     author: 'Andre Newsome',
     role: 'Founder',
     school: 'SkoConnect',
@@ -195,8 +195,8 @@ function RequestAccessModal({ onClose }: { onClose: () => void }) {
           </div>
         ) : (
           <>
-            <h3 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 24, color: '#fff', marginBottom: 6 }}>Request Beta Access</h3>
-            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 14, marginBottom: 28 }}>Free for beta schools. We'll review and get back to you within 24 hours.</p>
+            <h3 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 24, color: '#fff', marginBottom: 6 }}>Request Pilot Access</h3>
+            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 14, marginBottom: 28 }}>Free for pilot schools. We'll review and get back to you within 24 hours.</p>
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               <div>
                 <label style={labelStyle}>School Name *</label>
@@ -224,7 +224,7 @@ function RequestAccessModal({ onClose }: { onClose: () => void }) {
               <button type="submit" disabled={status === 'submitting'} style={{ background: status === 'submitting' ? 'rgba(13,148,136,0.5)' : '#0D9488', color: '#fff', border: 'none', borderRadius: 10, padding: '13px 0', fontSize: 15, fontWeight: 700, cursor: status === 'submitting' ? 'not-allowed' : 'pointer', marginTop: 4 }}>
                 {status === 'submitting' ? 'Submitting…' : 'Request Access →'}
               </button>
-              <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', textAlign: 'center' }}>No credit card required. Beta is free.</p>
+              <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', textAlign: 'center' }}>No credit card required. The pilot program is free.</p>
             </form>
           </>
         )}
@@ -627,10 +627,10 @@ export default function LandingPage() {
 
               {/* LEFT: Copy */}
               <div className="hero-copy">
-                {/* Beta badge */}
+                {/* Pilot badge */}
                 <div className="h-r0" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(20,184,166,0.15)', border: '1px solid rgba(20,184,166,0.3)', borderRadius: 100, padding: '7px 16px', marginBottom: 32 }}>
                   <span className="pulse-dot" style={{ width: 8, height: 8, borderRadius: '50%', background: '#2DD4BF', display: 'inline-block' }} />
-                  <span style={{ color: '#99F6E4', fontSize: 13, fontWeight: 500 }}>Now in Beta · Free for all schools</span>
+                  <span style={{ color: '#99F6E4', fontSize: 13, fontWeight: 500 }}>Pilot Program · Free for all schools</span>
                 </div>
 
                 {/* Headline */}
@@ -657,7 +657,7 @@ export default function LandingPage() {
 
                 {/* Trust pills */}
                 <div className="h-r4" style={{ display: 'flex', flexWrap: 'wrap', gap: 20 }}>
-                  {['🔒 Enterprise Security', '⚡ 99.9% Uptime', '📱 Mobile Apps', '✓ Free Beta'].map(p => (
+                  {['🔒 Enterprise Security', '⚡ 99.9% Uptime', '📱 Mobile Apps', '✓ Free Pilot Program'].map(p => (
                     <span key={p} style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13, fontWeight: 500 }}>{p}</span>
                   ))}
                 </div>
@@ -763,7 +763,7 @@ export default function LandingPage() {
           style={{ background: '#fff', borderTop: '1px solid #E8E8E0', borderBottom: '1px solid #E8E8E0', padding: '52px 24px' }}>
           <div className="stats-grid" style={{ maxWidth: 900, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 32, textAlign: 'center' }}>
             {[
-              { num: 'Beta',  label: 'Launching April 2026', color: '#14B8A6' },
+              { num: 'Pilot',  label: 'Launching April 2026', color: '#14B8A6' },
               { num: '99.9%', label: 'Platform Uptime',      color: '#8B5CF6' },
               { num: '🔒',      label: 'Firebase Security',      color: '#14B8A6' },
               { num: '📱',      label: 'iOS & Android Ready',   color: '#F59E0B' },
@@ -993,7 +993,7 @@ export default function LandingPage() {
               Ready to transform your school?
             </h2>
             <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 18, lineHeight: 1.6, marginBottom: 44, maxWidth: 480, margin: '0 auto 44px' }}>
-              Join the beta today — completely free for all schools during the beta period. No credit card required.
+              Join the pilot program today — completely free for all schools. No credit card required.
             </p>
             <div className="final-cta-buttons" style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center', marginBottom: 28 }}>
               <button onClick={() => setShowModal(true)} className="btn-teal" style={{ display: 'inline-block', padding: '15px 32px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', background: '#0D9488', border: 'none', cursor: 'pointer', boxShadow: '0 4px 32px rgba(20,184,166,0.4)' }}>
@@ -1037,7 +1037,7 @@ export default function LandingPage() {
                     { label: 'For Schools', href: '#for-schools' },
                     { label: 'Mobile Apps', href: '#features' },
                     { label: 'Security', href: 'https://admin.skoconnect.com/security' },
-                    { label: 'Pricing', href: '#' },
+                    { label: 'Pricing', href: 'mailto:info.skoconnect@agentmail.to?subject=Pricing%20Inquiry' },
                   ].map(l => (
                     <li key={l.label}><a href={l.href} style={{ color: '#57534E', fontSize: 14, textDecoration: 'none', transition: 'color 0.2s' }}
                       onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
@@ -1053,7 +1053,7 @@ export default function LandingPage() {
                 <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 12 }}>
                   {[
                     { label: 'About', href: 'https://admin.skoconnect.com/about' },
-                    { label: 'Blog', href: '#' },
+                    { label: 'Blog', href: 'mailto:info.skoconnect@agentmail.to?subject=Blog%20Inquiry' },
                     { label: 'Contact', href: 'mailto:support.skoconnect@agentmail.to' },
                     { label: 'Privacy Policy', href: 'https://admin.skoconnect.com/privacy' },
                     { label: 'Terms', href: 'https://admin.skoconnect.com/terms' },
