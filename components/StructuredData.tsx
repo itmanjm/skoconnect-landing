@@ -10,7 +10,7 @@ export default function StructuredData() {
             '@type': 'SoftwareApplication',
             name: 'SkoConnect',
             applicationCategory: 'EducationalApplication',
-            operatingSystem: 'Web, iOS, Android',
+            operatingSystem: 'Web, Android',
             offers: {
               '@type': 'Offer',
               price: '199',

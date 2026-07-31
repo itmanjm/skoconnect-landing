@@ -34,6 +34,19 @@ const features = [
     large: true,
   },
   {
+    icon: '🤖',
+    title: 'AI Document Processing',
+    description: 'Upload a PDF newsletter or timetable — Gemini AI extracts events, notices, and dates automatically. No manual data entry.',
+    tag: 'New',
+    large: true,
+  },
+  {
+    icon: '🔍',
+    title: 'Anomaly Detection',
+    description: 'AI flags suspicious entries before they reach parents — Christmas Day events, 3 AM start times, duplicates. Quality control built in.',
+    large: false,
+  },
+  {
     icon: '👨‍👩‍👧‍👦',
     title: 'Family Onboarding',
     description: 'Enroll entire families via CSV upload or a guided enrollment wizard. Get parents connected in minutes.',
@@ -41,8 +54,8 @@ const features = [
   },
   {
     icon: '📱',
-    title: 'Native Mobile Apps',
-    description: 'iOS and Android apps for parents and teachers. Push notifications keep everyone in the loop, always.',
+    title: 'Native Mobile App',
+    description: 'Android app for parents and teachers, now available on Google Play. Push notifications keep everyone in the loop, always.',
     large: false,
   },
 ];
@@ -642,11 +655,11 @@ export default function LandingPage() {
 
                 {/* Sub */}
                 <p className="h-r2 hero-sub" style={{ color: 'rgba(255,255,255,0.65)', fontSize: 18, lineHeight: 1.65, maxWidth: 460, marginBottom: 36 }}>
-                  Real-time announcements, digital forms, emergency broadcasts, and smart event management — unified in one platform built for the modern school community.
+                  Real-time announcements, digital forms, emergency broadcasts, smart event management, and AI-powered document processing — unified in one platform built for the modern school community.
                 </p>
 
                 {/* CTAs */}
-                <div className="h-r3" style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginBottom: 36 }}>
+                <div className="h-r3" style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginBottom: 20 }}>
                   <button onClick={() => setShowModal(true)} className="btn-teal" style={{ padding: '14px 28px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', background: '#0D9488', border: 'none', cursor: 'pointer', display: 'inline-block' }}>
                     <span>Request Access — Free</span>
                   </button>
@@ -655,9 +668,28 @@ export default function LandingPage() {
                   </a>
                 </div>
 
+                {/* Google Play badge */}
+                <a href="https://play.google.com/store/apps/details?id=com.skoconnect.skoconnect"
+                   target="_blank" rel="noopener noreferrer"
+                   className="h-r3"
+                   style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: '#000', borderRadius: 12, padding: '8px 16px 8px 12px', textDecoration: 'none', marginBottom: 36, transition: 'transform 0.15s ease', border: '1px solid rgba(255,255,255,0.15)' }}
+                   onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-1px)'}
+                   onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}>
+                  <svg width="20" height="22" viewBox="0 0 22 22" fill="none" style={{ flexShrink: 0 }}>
+                    <path d="M0.73 1.45C0.5 1.7 0.4 2.05 0.4 2.5V19.5C0.4 19.95 0.5 20.3 0.73 20.55L0.8 20.62L10.2 11.22V11.1V10.98L0.8 1.38L0.73 1.45Z" fill="#2196F3"/>
+                    <path d="M13.3 14.3L10.2 11.22V11.1V10.98L13.3 7.9L13.37 7.97L17.05 10.06C18.1 10.65 18.1 11.55 17.05 12.14L13.37 14.23L13.3 14.3Z" fill="#FFC107"/>
+                    <path d="M13.37 14.23L10.2 11.1L0.73 20.55C1.13 21 1.85 21.05 2.6 20.65L13.37 14.23Z" fill="#F44336"/>
+                    <path d="M13.37 7.97L2.6 1.55C1.85 1.1 1.13 1.2 0.73 1.65L10.2 11.1L13.37 7.97Z" fill="#4CAF50"/>
+                  </svg>
+                  <span style={{ color: '#fff', lineHeight: 1.2 }}>
+                    <span style={{ display: 'block', fontSize: 9, fontWeight: 400, opacity: 0.75, letterSpacing: '0.02em' }}>GET IT ON</span>
+                    <span style={{ display: 'block', fontSize: 14, fontWeight: 600 }}>Google Play</span>
+                  </span>
+                </a>
+
                 {/* Trust pills */}
                 <div className="h-r4" style={{ display: 'flex', flexWrap: 'wrap', gap: 20 }}>
-                  {['🔒 Enterprise Security', '⚡ 99.9% Uptime', '📱 Mobile Apps', '✓ Free Pilot Program'].map(p => (
+                  {['🔒 Enterprise Security', '⚡ 99.9% Uptime', '📲 Now on Google Play', '✓ Free Pilot Program'].map(p => (
                     <span key={p} style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13, fontWeight: 500 }}>{p}</span>
                   ))}
                 </div>
@@ -763,10 +795,10 @@ export default function LandingPage() {
           style={{ background: '#fff', borderTop: '1px solid #E8E8E0', borderBottom: '1px solid #E8E8E0', padding: '52px 24px' }}>
           <div className="stats-grid" style={{ maxWidth: 900, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 32, textAlign: 'center' }}>
             {[
-              { num: 'Pilot',  label: 'Launching April 2026', color: '#14B8A6' },
+              { num: 'Live',  label: 'Now on Google Play', color: '#14B8A6' },
               { num: '99.9%', label: 'Platform Uptime',      color: '#8B5CF6' },
               { num: '🔒',      label: 'Firebase Security',      color: '#14B8A6' },
-              { num: '📱',      label: 'iOS & Android Ready',   color: '#F59E0B' },
+              { num: '📱',      label: 'Live on Google Play',   color: '#F59E0B' },
             ].map(s => (
               <div key={s.label}>
                 <div style={{ fontFamily: 'Outfit,sans-serif', fontWeight: 800, fontSize: '2.8rem', lineHeight: 1, letterSpacing: '-0.04em', color: s.color, marginBottom: 6 }}>{s.num}</div>
@@ -789,7 +821,7 @@ export default function LandingPage() {
                 Built for modern schools
               </h2>
               <p style={{ color: '#78716C', fontSize: 17, lineHeight: 1.6, maxWidth: 580, margin: '0 auto' }}>
-                Six core capabilities that replace fragmented tools, WhatsApp groups, and paper forms — unified in one platform.
+                Eight core capabilities — including AI-powered document processing — that replace fragmented tools, WhatsApp groups, and paper forms.
               </p>
             </div>
 
@@ -966,7 +998,7 @@ export default function LandingPage() {
               {[
                 { icon: '☁️', title: 'Google Cloud Firebase', sub: 'Secure cloud infrastructure' },
                 { icon: '🔒', title: 'SSL Encrypted',   sub: 'End-to-end security' },
-                { icon: '📱', title: 'Native Mobile',   sub: 'iOS & Android apps' },
+                { icon: '📱', title: 'Android App',   sub: 'Now on Google Play' },
                 { icon: '⚡', title: '99.9% Uptime',    sub: 'SLA guaranteed' },
               ].map(item => (
                 <div key={item.title} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -995,13 +1027,31 @@ export default function LandingPage() {
             <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 18, lineHeight: 1.6, marginBottom: 44, maxWidth: 480, margin: '0 auto 44px' }}>
               Join the pilot program today — completely free for all schools. No credit card required.
             </p>
-            <div className="final-cta-buttons" style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center', marginBottom: 28 }}>
+            <div className="final-cta-buttons" style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center', marginBottom: 20 }}>
               <button onClick={() => setShowModal(true)} className="btn-teal" style={{ display: 'inline-block', padding: '15px 32px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', background: '#0D9488', border: 'none', cursor: 'pointer', boxShadow: '0 4px 32px rgba(20,184,166,0.4)' }}>
                 <span>Request Access — Free</span>
               </button>
               <button onClick={() => setShowModal(true)} className="btn-ghost-white" style={{ display: 'inline-block', padding: '15px 32px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', background: 'transparent', border: '1px solid rgba(255,255,255,0.3)', cursor: 'pointer' }}>
                 Request a Demo
               </button>
+            </div>
+            <div style={{ marginBottom: 28 }}>
+              <a href="https://play.google.com/store/apps/details?id=com.skoconnect.skoconnect"
+                 target="_blank" rel="noopener noreferrer"
+                 style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: '#000', borderRadius: 12, padding: '8px 16px 8px 12px', textDecoration: 'none', transition: 'transform 0.15s ease', border: '1px solid rgba(255,255,255,0.15)' }}
+                 onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-1px)'}
+                 onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}>
+                <svg width="20" height="22" viewBox="0 0 22 22" fill="none" style={{ flexShrink: 0 }}>
+                  <path d="M0.73 1.45C0.5 1.7 0.4 2.05 0.4 2.5V19.5C0.4 19.95 0.5 20.3 0.73 20.55L0.8 20.62L10.2 11.22V11.1V10.98L0.8 1.38L0.73 1.45Z" fill="#2196F3"/>
+                  <path d="M13.3 14.3L10.2 11.22V11.1V10.98L13.3 7.9L13.37 7.97L17.05 10.06C18.1 10.65 18.1 11.55 17.05 12.14L13.37 14.23L13.3 14.3Z" fill="#FFC107"/>
+                  <path d="M13.37 14.23L10.2 11.1L0.73 20.55C1.13 21 1.85 21.05 2.6 20.65L13.37 14.23Z" fill="#F44336"/>
+                  <path d="M13.37 7.97L2.6 1.55C1.85 1.1 1.13 1.2 0.73 1.65L10.2 11.1L13.37 7.97Z" fill="#4CAF50"/>
+                </svg>
+                <span style={{ color: '#fff', lineHeight: 1.2 }}>
+                  <span style={{ display: 'block', fontSize: 9, fontWeight: 400, opacity: 0.75, letterSpacing: '0.02em' }}>GET IT ON</span>
+                  <span style={{ display: 'block', fontSize: 14, fontWeight: 600 }}>Google Play</span>
+                </span>
+              </a>
             </div>
             <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: 13 }}>
               Questions?{' '}
@@ -1035,7 +1085,7 @@ export default function LandingPage() {
                   {[
                     { label: 'Features', href: '#features' },
                     { label: 'For Schools', href: '#for-schools' },
-                    { label: 'Mobile Apps', href: '#features' },
+                    { label: 'Download App', href: 'https://play.google.com/store/apps/details?id=com.skoconnect.skoconnect' },
                     { label: 'Security', href: 'https://admin.skoconnect.com/security' },
                     { label: 'Pricing', href: 'mailto:info.skoconnect@agentmail.to?subject=Pricing%20Inquiry' },
                   ].map(l => (
