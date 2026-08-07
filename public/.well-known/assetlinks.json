@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.skoconnect.skoconnect",
+      "sha256_cert_fingerprints": [
+        "82:95:0B:71:64:F6:FF:9A:52:A1:A8:FA:B7:48:11:35:E7:2E:C0:A7:9F:60:CB:49:69:54:A9:FF:30:F7:EF:E7"
+      ]
+    }
+  }
+]

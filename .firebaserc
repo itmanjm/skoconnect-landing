@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "school-connect-enterprise",
+    "staging": "school-connect-staging"
+  },
+  "targets": {
+    "school-connect-enterprise": {
+      "hosting": {
+        "skoconnect": [
+          "skoconnect"
+        ]
+      }
+    }
+  }
+}
