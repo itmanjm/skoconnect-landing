@@ -48,7 +48,7 @@ const features = [
   },
   {
     icon: '👨‍👩‍👧‍👦',
-    title: 'Family Onboarding',
+    title: 'Parent and Student Onboarding',
     description: 'Enroll entire families via CSV upload, guided wizard, or QR scan at registration. Get parents connected in minutes.',
     large: false,
   },
