@@ -5,7 +5,7 @@ import GoogleAnalytics from '@/components/GoogleAnalytics';
 
 export const metadata: Metadata = {
   title: 'SkoConnect | AI-Powered School Communication Software Jamaica',
-  description: 'Transform how Jamaican schools communicate with parents. Real-time announcements, emergency alerts, digital forms, AI-powered document processing & mobile apps. Free beta for all schools.',
+  description: 'Transform how Jamaican schools communicate with parents. Real-time announcements, emergency alerts, digital forms, AI-powered document processing & mobile apps. Free Pilot Program available for schools.',
   keywords: 'school communication, parent engagement, emergency alerts, digital forms, school management system, Jamaica, Caribbean, AI document processing, Gemini',
   authors: [{ name: 'SkoConnect' }],
   creator: 'SkoConnect',

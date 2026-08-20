@@ -604,11 +604,11 @@ export default function LandingPage() {
 
             {/* Links (desktop) */}
             <div style={{ display: 'flex', gap: 32 }} className="hidden md:flex">
-              {['#features', '#for-schools', '#how-it-works', '#testimonials'].map((href, i) => (
+              {['#features', '#for-schools', '#how-it-works', '#founder-vision'].map((href, i) => (
                 <a key={href} href={href} style={{ color: 'rgba(255,255,255,0.65)', fontSize: 14, fontWeight: 500, textDecoration: 'none', transition: 'color 0.2s' }}
                   onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
                   onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.65)')}
-                >{['Features', 'For Schools', 'How It Works', 'Reviews'][i]}</a>
+                >{['Features', 'For Schools', 'How It Works', "Founder's Vision"][i]}</a>
               ))}
             </div>
 
@@ -643,7 +643,7 @@ export default function LandingPage() {
                 {/* Pilot badge */}
                 <div className="h-r0" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(20,184,166,0.15)', border: '1px solid rgba(20,184,166,0.3)', borderRadius: 100, padding: '7px 16px', marginBottom: 32 }}>
                   <span className="pulse-dot" style={{ width: 8, height: 8, borderRadius: '50%', background: '#2DD4BF', display: 'inline-block' }} />
-                  <span style={{ color: '#99F6E4', fontSize: 13, fontWeight: 500 }}>Pilot Program · Free for all schools</span>
+                  <span style={{ color: '#99F6E4', fontSize: 13, fontWeight: 500 }}>Free Pilot Program for schools</span>
                 </div>
 
                 {/* Headline */}
@@ -689,7 +689,7 @@ export default function LandingPage() {
 
                 {/* Trust pills */}
                 <div className="h-r4" style={{ display: 'flex', flexWrap: 'wrap', gap: 20 }}>
-                  {['🔒 Enterprise Security', '⚡ 99.9% Uptime', '📲 Now on Google Play', '✓ Free Pilot Program'].map(p => (
+                  {['🔒 Secure by design on Google Cloud', '☁️ Built on Google Cloud infrastructure', '📲 Now on Google Play', '✓ Free Pilot Program'].map(p => (
                     <span key={p} style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13, fontWeight: 500 }}>{p}</span>
                   ))}
                 </div>
@@ -697,6 +697,9 @@ export default function LandingPage() {
 
               {/* RIGHT: Floating cards */}
               <div style={{ position: 'relative', height: 540 }} className="hero-right hidden lg:block">
+                <div style={{ position: 'absolute', top: 20, right: 8, zIndex: 2, display: 'inline-flex', alignItems: 'center', gap: 6, padding: '6px 12px', borderRadius: 999, background: 'rgba(255,255,255,0.92)', border: '1px solid rgba(232,232,224,0.9)', color: '#57534E', fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', boxShadow: '0 10px 30px rgba(28,25,23,0.08)' }}>
+                  Demo Preview
+                </div>
 
                 {/* Decorative dot grid */}
                 <div style={{ position: 'absolute', top: 0, left: 0, opacity: 0.25 }}>
@@ -724,7 +727,7 @@ export default function LandingPage() {
                             <div key={i} style={{ width: 20, height: 20, borderRadius: '50%', background: c, border: '2px solid white', marginLeft: i > 0 ? -6 : 0 }} />
                           ))}
                         </div>
-                        <span style={{ fontSize: 11, color: '#A8A29E' }}>+24 confirmed</span>
+                        <span style={{ fontSize: 11, color: '#A8A29E' }}>Sample parent confirmations</span>
                       </div>
                     </div>
                   </div>
@@ -735,10 +738,10 @@ export default function LandingPage() {
                   <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                     <div style={{ width: 36, height: 36, borderRadius: 10, background: '#FFFBEB', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: 18 }}>📋</div>
                     <div style={{ flex: 1 }}>
-                      <div style={{ fontSize: 10, fontWeight: 700, color: '#B45309', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 2 }}>Form Responses</div>
+                      <div style={{ fontSize: 10, fontWeight: 700, color: '#B45309', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 2 }}>Sample Form Responses</div>
                       <p style={{ fontSize: 13, fontWeight: 600, color: '#1C1917', marginBottom: 8 }}>Permission Slip 2026</p>
                       <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 4 }}>
-                        <span style={{ color: '#78716C' }}>47 of 52 submitted</span>
+                        <span style={{ color: '#78716C' }}>Sample progress: 47 of 52 submitted</span>
                         <span style={{ fontWeight: 700, color: '#14B8A6' }}>90%</span>
                       </div>
                       <div className="progress-bar">
@@ -754,13 +757,13 @@ export default function LandingPage() {
                     <div style={{ width: 36, height: 36, borderRadius: 10, background: '#F5F3FF', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: 18 }}>📅</div>
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
-                        <span style={{ fontSize: 10, fontWeight: 700, color: '#6D28D9', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Upcoming Event</span>
+                        <span style={{ fontSize: 10, fontWeight: 700, color: '#6D28D9', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Sample Event</span>
                         <span style={{ fontSize: 10, color: '#A8A29E' }}>3 days</span>
                       </div>
                       <p style={{ fontSize: 13, fontWeight: 600, color: '#1C1917', marginBottom: 2 }}>Annual Sports Day</p>
                       <p style={{ fontSize: 12, color: '#78716C', marginBottom: 6 }}>March 15 · School Grounds</p>
                       <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: '#F0FDF4', color: '#166534', fontSize: 11, fontWeight: 600, padding: '3px 8px', borderRadius: 100 }}>
-                        ✓ 38 RSVPs
+                        ✓ Sample RSVP snapshot
                       </span>
                     </div>
                   </div>
@@ -771,8 +774,8 @@ export default function LandingPage() {
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                     <span style={{ fontSize: 22 }}>🚨</span>
                     <div>
-                      <p style={{ fontSize: 12, fontWeight: 700, color: '#BE123C' }}>Emergency Broadcast</p>
-                      <p style={{ fontSize: 11, color: '#E11D48', marginTop: 1 }}>Delivered to 247 contacts</p>
+                      <p style={{ fontSize: 12, fontWeight: 700, color: '#BE123C' }}>Sample Emergency Broadcast</p>
+                      <p style={{ fontSize: 11, color: '#E11D48', marginTop: 1 }}>Sample delivery summary</p>
                     </div>
                   </div>
                 </div>
@@ -795,10 +798,10 @@ export default function LandingPage() {
           style={{ background: '#fff', borderTop: '1px solid #E8E8E0', borderBottom: '1px solid #E8E8E0', padding: '52px 24px' }}>
           <div className="stats-grid" style={{ maxWidth: 900, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 32, textAlign: 'center' }}>
             {[
-              { num: 'Live',  label: 'Now on Google Play', color: '#14B8A6' },
-              { num: '99.9%', label: 'Platform Uptime',      color: '#8B5CF6' },
-              { num: '🔒',      label: 'Firebase Security',      color: '#14B8A6' },
-              { num: '📱',      label: 'Live on Google Play',   color: '#F59E0B' },
+              { num: '☁️', label: 'Built on Google Cloud infrastructure', color: '#14B8A6' },
+              { num: '🔒', label: 'Encrypted in transit and at rest', color: '#8B5CF6' },
+              { num: '📱', label: 'Now on Google Play', color: '#14B8A6' },
+              { num: '✓', label: 'Free Pilot Program', color: '#F59E0B' },
             ].map(s => (
               <div key={s.label}>
                 <div style={{ fontFamily: 'Outfit,sans-serif', fontWeight: 800, fontSize: '2.8rem', lineHeight: 1, letterSpacing: '-0.04em', color: s.color, marginBottom: 6 }}>{s.num}</div>
@@ -913,7 +916,7 @@ export default function LandingPage() {
                 Up and running in 3 steps
               </h2>
               <p style={{ color: '#78716C', fontSize: 17, lineHeight: 1.6, maxWidth: 480, margin: '0 auto' }}>
-                No IT department required. Schools are live the same day.
+                No IT department required. Designed for same-day setup.
               </p>
             </div>
 
@@ -945,7 +948,7 @@ export default function LandingPage() {
         </section>
 
         {/* ────────────────────── FROM THE FOUNDER ───────────────────── */}
-        <section id="testimonials" data-animate className={`s-hide ${vis('testimonials') ? 's-show' : ''}`}
+        <section id="founder-vision" data-animate className={`s-hide ${vis('founder-vision') ? 's-show' : ''}`}
           style={{ padding: '96px 24px', background: '#fff' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
 
@@ -992,14 +995,14 @@ export default function LandingPage() {
           style={{ padding: '64px 24px', background: '#FAFAF8', borderTop: '1px solid #E8E8E0', borderBottom: '1px solid #E8E8E0' }}>
           <div style={{ maxWidth: 900, margin: '0 auto' }}>
             <p style={{ textAlign: 'center', fontSize: 11, fontWeight: 700, color: '#D6D3D1', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: 40 }}>
-              Enterprise-grade infrastructure
+              Platform foundations
             </p>
             <div className="trust-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 24 }}>
               {[
-                { icon: '☁️', title: 'Google Cloud Firebase', sub: 'Secure cloud infrastructure' },
-                { icon: '🔒', title: 'SSL Encrypted',   sub: 'End-to-end security' },
+                { icon: '☁️', title: 'Google Cloud infrastructure', sub: 'Built on Google Cloud services' },
+                { icon: '🔒', title: 'Secure by design on Google Cloud',   sub: 'Encrypted in transit and at rest' },
                 { icon: '📱', title: 'Android App',   sub: 'Now on Google Play' },
-                { icon: '⚡', title: '99.9% Uptime',    sub: 'SLA guaranteed' },
+                { icon: '✓', title: 'Free Pilot Program',    sub: 'Available for schools getting started with SkoConnect' },
               ].map(item => (
                 <div key={item.title} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                   <div style={{ width: 44, height: 44, borderRadius: 12, background: '#fff', border: '1px solid #E8E8E0', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, flexShrink: 0, boxShadow: '0 1px 4px rgba(28,25,23,0.04)' }}>
