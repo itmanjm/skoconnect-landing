@@ -1028,7 +1028,7 @@ export default function LandingPage() {
               Ready to transform your school?
             </h2>
             <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 18, lineHeight: 1.6, marginBottom: 44, maxWidth: 480, margin: '0 auto 44px' }}>
-              Join the pilot program today — completely free for all schools. No credit card required.
+              Join the pilot program today — free for participating schools during the pilot. No credit card required, no automatic charges.
             </p>
             <div className="final-cta-buttons" style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center', marginBottom: 20 }}>
               <button onClick={() => setShowModal(true)} className="btn-teal" style={{ display: 'inline-block', padding: '15px 32px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', background: '#0D9488', border: 'none', cursor: 'pointer', boxShadow: '0 4px 32px rgba(20,184,166,0.4)' }}>
