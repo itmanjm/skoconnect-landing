@@ -49,7 +49,20 @@ const features = [
   {
     icon: '👨‍👩‍👧‍👦',
     title: 'Family Onboarding',
-    description: 'Enroll entire families via CSV upload or a guided enrollment wizard. Get parents connected in minutes.',
+    description: 'Enroll entire families via CSV upload, guided wizard, or QR scan at registration. Get parents connected in minutes.',
+    large: false,
+  },
+  {
+    icon: '📶',
+    title: 'Offline-Tolerant App',
+    description: 'Built for real connectivity. Notices and forms stay readable on weak or dropped connections — parents never miss critical updates.',
+    tag: 'Jamaica-ready',
+    large: false,
+  },
+  {
+    icon: '📊',
+    title: 'Engagement Analytics',
+    description: 'See notice reach, form response rates, and engagement trends in one dashboard. Know what your community actually reads.',
     large: false,
   },
   {
@@ -824,7 +837,7 @@ export default function LandingPage() {
                 Built for modern schools
               </h2>
               <p style={{ color: '#78716C', fontSize: 17, lineHeight: 1.6, maxWidth: 580, margin: '0 auto' }}>
-                Eight core capabilities — including AI-powered document processing — that replace fragmented tools, WhatsApp groups, and paper forms.
+                Ten core capabilities — including AI-powered document processing — that replace fragmented tools, WhatsApp groups, and paper forms.
               </p>
             </div>
 
