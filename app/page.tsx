@@ -221,8 +221,8 @@ function RequestAccessModal({ onClose }: { onClose: () => void }) {
           </div>
         ) : (
           <>
-            <h3 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 24, color: '#fff', marginBottom: 6 }}>Request Pilot Access</h3>
-            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 14, marginBottom: 28 }}>Free for pilot schools. We'll review and get back to you within 24 hours.</p>
+            <h3 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 24, color: '#fff', marginBottom: 6 }}>Start Your School's Pilot</h3>
+            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 14, marginBottom: 28 }}>Free during the pilot program — SkoConnect is live in production today. We'll be in touch within 24 hours.</p>
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               <div>
                 <label style={labelStyle}>School Name *</label>
@@ -656,25 +656,23 @@ export default function LandingPage() {
                 {/* Pilot badge */}
                 <div className="h-r0" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(20,184,166,0.15)', border: '1px solid rgba(20,184,166,0.3)', borderRadius: 100, padding: '7px 16px', marginBottom: 32 }}>
                   <span className="pulse-dot" style={{ width: 8, height: 8, borderRadius: '50%', background: '#2DD4BF', display: 'inline-block' }} />
-                  <span style={{ color: '#99F6E4', fontSize: 13, fontWeight: 500 }}>Free Pilot Program for schools</span>
+                  <span style={{ color: '#99F6E4', fontSize: 13, fontWeight: 500 }}>Live in production · Free Pilot Program</span>
                 </div>
 
                 {/* Headline */}
                 <h1 className="serif h-r1" style={{ fontSize: 'clamp(2.8rem,5vw,4.4rem)', lineHeight: 1.08, letterSpacing: '-0.025em', color: '#fff', marginBottom: 24 }}>
-                  School<br/>
-                  Communication,{' '}
-                  <em className="teal-text" style={{ fontStyle: 'italic' }}>Elevated.</em>
+                  Replace WhatsApp chaos with accountable school communication in one day.
                 </h1>
 
                 {/* Sub */}
                 <p className="h-r2 hero-sub" style={{ color: 'rgba(255,255,255,0.65)', fontSize: 18, lineHeight: 1.65, maxWidth: 460, marginBottom: 36 }}>
-                  Real-time announcements, digital forms, emergency broadcasts, smart event management, and AI-powered document processing — unified in one platform built for the modern school community.
+                  Announcements, two-way messaging with teacher reply hours, digital forms, emergency broadcasts, and AI document processing — one system built for Jamaican schools.
                 </p>
 
                 {/* CTAs */}
                 <div className="h-r3" style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginBottom: 20 }}>
                   <button onClick={() => setShowModal(true)} className="btn-teal" style={{ padding: '14px 28px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', background: '#0D9488', border: 'none', cursor: 'pointer', display: 'inline-block' }}>
-                    <span>Request Access — Free</span>
+                    <span>Start Your Free Pilot →</span>
                   </button>
                   <a href="https://admin.skoconnect.com/login" className="btn-ghost-white" style={{ padding: '14px 28px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', textDecoration: 'none', display: 'inline-block' }}>
                     Sign In →
@@ -1015,7 +1013,7 @@ export default function LandingPage() {
                 { icon: '☁️', title: 'Google Cloud infrastructure', sub: 'Built on Google Cloud services' },
                 { icon: '🔒', title: 'Secure by design on Google Cloud',   sub: 'Encrypted in transit and at rest' },
                 { icon: '📱', title: 'Android App',   sub: 'Now on Google Play' },
-                { icon: '✓', title: 'Free Pilot Program',    sub: 'Available for schools getting started with SkoConnect' },
+                { icon: '✓', title: 'Free Pilot Program',    sub: 'Live in production — free for schools during the pilot program' },
               ].map(item => (
                 <div key={item.title} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                   <div style={{ width: 44, height: 44, borderRadius: 12, background: '#fff', border: '1px solid #E8E8E0', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, flexShrink: 0, boxShadow: '0 1px 4px rgba(28,25,23,0.04)' }}>
@@ -1041,11 +1039,11 @@ export default function LandingPage() {
               Ready to transform your school?
             </h2>
             <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 18, lineHeight: 1.6, marginBottom: 44, maxWidth: 480, margin: '0 auto 44px' }}>
-              Join the pilot program today — free for participating schools during the pilot. No credit card required, no automatic charges.
+              SkoConnect is live in production and on Google Play. The Free Pilot Program is free for participating schools — and new capabilities like two-way messaging roll out to pilot schools first as they clear app review. No credit card required, no automatic charges.
             </p>
             <div className="final-cta-buttons" style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center', marginBottom: 20 }}>
               <button onClick={() => setShowModal(true)} className="btn-teal" style={{ display: 'inline-block', padding: '15px 32px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', background: '#0D9488', border: 'none', cursor: 'pointer', boxShadow: '0 4px 32px rgba(20,184,166,0.4)' }}>
-                <span>Request Access — Free</span>
+                <span>Start Your Free Pilot →</span>
               </button>
               <button onClick={() => setShowModal(true)} className="btn-ghost-white" style={{ display: 'inline-block', padding: '15px 32px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', background: 'transparent', border: '1px solid rgba(255,255,255,0.3)', cursor: 'pointer' }}>
                 Request a Demo
