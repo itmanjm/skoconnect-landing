@@ -71,6 +71,20 @@ const features = [
     description: 'Android app for parents and teachers, now available on Google Play. Push notifications keep everyone in the loop, always.',
     large: false,
   },
+  {
+    icon: '💬',
+    title: 'Two-Way Messaging',
+    tag: 'New',
+    large: false,
+    description: 'Direct messages between parents, teachers, and front office — scoped to your school\'s verified roster, with teacher reply hours and built-in block and report.',
+  },
+  {
+    icon: '✅',
+    title: 'Verified School Community',
+    tag: 'Trust',
+    large: false,
+    description: 'Every account is tied to your school\'s roster — one identity per real person. Messages can only come from who they say they are.',
+  },
 ];
 
 const personas = [
@@ -835,7 +849,7 @@ export default function LandingPage() {
                 Built for modern schools
               </h2>
               <p style={{ color: '#78716C', fontSize: 17, lineHeight: 1.6, maxWidth: 580, margin: '0 auto' }}>
-                Ten core capabilities — including AI-powered document processing — that replace fragmented tools, WhatsApp groups, and paper forms.
+                Twelve core capabilities — including two-way messaging and AI-powered document processing — that replace fragmented tools, WhatsApp groups, and paper forms.
               </p>
             </div>
 
