@@ -75,14 +75,14 @@ const features = [
 
 const personas = [
   {
-    role: 'School Administrators',
+    role: 'School Leaders',
     emoji: '🏫',
-    tagline: 'Manage your school with clarity and control',
+    tagline: 'Run school communication with control and proof',
     benefits: [
-      'Onboard entire families via CSV in under 5 minutes',
-      'One-click emergency broadcasts with read receipts',
-      'Real-time analytics on engagement and form responses',
-      'Role-based access control for every staff member',
+      'Reach the right families fast — from daily notices to emergency broadcasts.',
+      'See who received, opened, and responded, so communication stops being guesswork.',
+      'Replace scattered chats and paper trails with one school-owned system.',
+      'Bring your whole school community onboard quickly and manage access by role.',
     ],
     accent: '#14B8A6',
     bg: '#F0FDFA',
@@ -90,12 +90,12 @@ const personas = [
   {
     role: 'Teachers',
     emoji: '👨‍🏫',
-    tagline: 'Focus on teaching, not administration',
+    tagline: 'Spend less time chasing responses',
     benefits: [
-      'Send targeted notices to your class in seconds',
-      'Create and distribute digital forms effortlessly',
-      'Track event RSVPs and form submissions live',
-      'Direct push notifications to parents via mobile app',
+      'Send class updates in seconds without managing side chats.',
+      'Collect forms, RSVPs, and confirmations in one place instead of on paper.',
+      'Keep parent communication structured, professional, and tied to the school.',
+      'Get faster responses because families receive updates where school communication belongs.',
     ],
     accent: '#F59E0B',
     bg: '#FFFBEB',
@@ -103,28 +103,15 @@ const personas = [
   {
     role: 'Parents',
     emoji: '👨‍👩‍👧',
-    tagline: 'Stay connected to your child\'s school life',
+    tagline: 'Know what matters without digging through chats',
     benefits: [
-      'Never miss an important announcement or event',
-      'Submit permission slips and consent forms digitally',
-      'Receive emergency alerts instantly on your phone',
-      'One app for all your children across any grade',
+      'Get important school updates in one trusted place.',
+      'Respond to forms, reminders, and event requests from your phone.',
+      'Stay ahead of emergencies, deadlines, and school events before they are missed.',
+      'Manage communication for more than one child from one account.',
     ],
     accent: '#8B5CF6',
     bg: '#F5F3FF',
-  },
-  {
-    role: 'School Staff',
-    emoji: '💼',
-    tagline: 'Stay aligned with the whole community',
-    benefits: [
-      'Access relevant notices and event updates instantly',
-      'Participate in school-wide emergency communications',
-      'Streamlined workflows for administrative tasks',
-      'Real-time visibility into form submission status',
-    ],
-    accent: '#EC4899',
-    bg: '#FDF2F8',
   },
 ];
 
@@ -863,13 +850,13 @@ export default function LandingPage() {
 
             <div style={{ textAlign: 'center', marginBottom: 48 }}>
               <div style={{ display: 'inline-block', padding: '6px 16px', borderRadius: 100, background: '#FFFBEB', border: '1px solid #FEF3C7', color: '#B45309', fontSize: 13, fontWeight: 600, marginBottom: 16 }}>
-                For Everyone
+                For Schools
               </div>
               <h2 className="serif" style={{ fontSize: 'clamp(2rem,3.5vw,3rem)', lineHeight: 1.18, letterSpacing: '-0.025em', color: '#1C1917', marginBottom: 16 }}>
-                Built for your <em style={{ fontStyle: 'italic' }}>whole</em> community
+                Different roles. One <em style={{ fontStyle: 'italic' }}>accountable</em> communication system.
               </h2>
               <p style={{ color: '#78716C', fontSize: 17, lineHeight: 1.6, maxWidth: 560, margin: '0 auto' }}>
-                One platform with distinct experiences for every role in your school ecosystem.
+                SkoConnect gives school leaders control, teachers speed, and families clarity — without the chaos of WhatsApp groups, paper forms, and scattered follow-up.
               </p>
             </div>
 
@@ -1039,7 +1026,7 @@ export default function LandingPage() {
               Ready to transform your school?
             </h2>
             <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 18, lineHeight: 1.6, marginBottom: 44, maxWidth: 480, margin: '0 auto 44px' }}>
-              SkoConnect is live in production and on Google Play. The Free Pilot Program is free for participating schools — and new capabilities like two-way messaging roll out to pilot schools first as they clear app review. No credit card required, no automatic charges.
+              SkoConnect is live in production and on Google Play. The Free Pilot Program is available at no cost to participating schools during the pilot period. Pricing for full rollout will be shared before the pilot ends. No credit card required, and no school will be charged automatically. The mobile app is free to download, but access is activated through a school's subscription or pilot enrollment — families do not pay separately for the app.
             </p>
             <div className="final-cta-buttons" style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center', marginBottom: 20 }}>
               <button onClick={() => setShowModal(true)} className="btn-teal" style={{ display: 'inline-block', padding: '15px 32px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', background: '#0D9488', border: 'none', cursor: 'pointer', boxShadow: '0 4px 32px rgba(20,184,166,0.4)' }}>
