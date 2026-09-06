@@ -2,8 +2,8 @@
 
 import { useEffect } from 'react';
 
-// Google Analytics 4 Tracking ID
-const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'; // Replace with actual GA4 measurement ID
+// H-2: GA4 is env-gated. No NEXT_PUBLIC_GA4_ID → no script tag, no 147KB download.
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA4_ID;
 
 // Type declarations for Google Analytics globals
 declare global {
@@ -15,8 +15,9 @@ declare global {
 
 export default function GoogleAnalytics() {
   useEffect(() => {
-    // Only initialize GA4 on client-side and in production
-    if (typeof window !== 'undefined' && process.env.NODE_ENV === 'production') {
+    if (!GA_MEASUREMENT_ID || typeof window === 'undefined' || process.env.NODE_ENV !== 'production') {
+      return;
+    }
       // Load gtag.js
       const script = document.createElement('script');
       script.async = true;
@@ -41,7 +42,6 @@ export default function GoogleAnalytics() {
           dimension4: 'school_location',
         },
       });
-    }
   }, []);
 
   return null;
