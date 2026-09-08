@@ -654,7 +654,7 @@ export default function LandingPage() {
         </nav>
 
         {/* ────────────────────── HERO ───────────────────────────── */}
-        <section className="hero-bg" style={{ minHeight: '100vh', position: 'relative', display: 'flex', alignItems: 'center', paddingTop: 80, paddingBottom: 64, overflow: 'hidden' }}>
+        <section className="hero-bg hero-min-height" style={{ position: 'relative', display: 'flex', alignItems: 'center', paddingTop: 80, paddingBottom: 64, overflow: 'hidden' }}>
 
           {/* Grid overlay */}
           <div className="grid-overlay" style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }} />
