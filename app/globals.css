@@ -297,3 +297,9 @@ main {
 .animate-slide-up {
   animation: slideUp 0.5s ease-out forwards;
 }
+
+/* ponytail: 100vh fallback for browsers without dvh; dvh tracks mobile URL bar */
+.hero-min-height {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
