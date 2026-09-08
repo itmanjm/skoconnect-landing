@@ -9,7 +9,7 @@ const features = [
   {
     icon: '📢',
     title: 'Real-Time Announcements',
-    description: 'Push critical updates instantly. Emergency alerts reach every parent, teacher, and student in seconds — not hours.',
+    description: 'Push critical updates instantly, or schedule them to the minute. Emergency alerts reach every parent, teacher, and student in seconds — not hours.',
     tag: 'Core',
     large: true,
   },
@@ -21,9 +21,10 @@ const features = [
     large: false,
   },
   {
-    icon: '📅',
-    title: 'Event Management',
-    description: 'Schedule events, manage RSVPs, and send automated reminders at configurable intervals before each event.',
+    icon: '⏱️',
+    title: 'Precision-Scheduled Notices',
+    tag: 'New',
+    description: 'Draft tonight, land at 7:00 a.m. sharp. Schedule any notice down to the exact minute — with automatic event reminders — so the message arrives when parents actually read it.',
     large: false,
   },
   {
@@ -37,19 +38,20 @@ const features = [
     icon: '🤖',
     title: 'AI Document Processing',
     description: 'Upload a PDF newsletter or timetable — Gemini AI extracts events, notices, and dates automatically. No manual data entry.',
-    tag: 'New',
+    tag: 'AI',
     large: true,
+  },
+  {
+    icon: '💡',
+    title: 'AI Form-Field Help',
+    tag: 'New',
+    description: 'A "?" on every form field gives parents plain-language explanations instantly. Fewer confused calls to the office, more forms completed right the first time.',
+    large: false,
   },
   {
     icon: '🔍',
     title: 'Anomaly Detection',
     description: 'AI flags suspicious entries before they reach parents — Christmas Day events, 3 AM start times, duplicates. Quality control built in.',
-    large: false,
-  },
-  {
-    icon: '👨‍👩‍👧‍👦',
-    title: 'Parent and Student Onboarding',
-    description: 'Enroll entire families via CSV upload, guided wizard, or QR scan at registration. Get parents connected in minutes.',
     large: false,
   },
   {
@@ -74,7 +76,6 @@ const features = [
   {
     icon: '💬',
     title: 'Two-Way Messaging',
-    tag: 'New',
     large: false,
     description: 'Direct messages between parents, teachers, and front office — scoped to your school\'s verified roster, with teacher reply hours and built-in block and report.',
   },
@@ -83,7 +84,7 @@ const features = [
     title: 'Verified School Community',
     tag: 'Trust',
     large: false,
-    description: 'Every account is tied to your school\'s roster — one identity per real person. Messages can only come from who they say they are.',
+    description: 'Every account is tied to your school\'s roster — one identity per real person. Enroll families by CSV, wizard, or QR scan, and messages can only come from who they say they are.',
   },
 ];
 
@@ -682,7 +683,7 @@ export default function LandingPage() {
 
                 {/* Sub */}
                 <p className="h-r2 hero-sub" style={{ color: 'rgba(255,255,255,0.65)', fontSize: 18, lineHeight: 1.65, maxWidth: 460, marginBottom: 36 }}>
-                  Announcements, two-way messaging with teacher reply hours, digital forms, emergency broadcasts, and AI document processing — one system built for Jamaican schools.
+                  Minute-perfect scheduled notices, two-way messaging with teacher reply hours, digital forms, emergency broadcasts, and AI document processing — one system built for Jamaican schools.
                 </p>
 
                 {/* CTAs */}
