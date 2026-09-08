@@ -89,14 +89,14 @@ const features = [
 
 const personas = [
   {
-    role: 'School Administrators',
+    role: 'School Leaders',
     emoji: '🏫',
-    tagline: 'Manage your school with clarity and control',
+    tagline: 'Run school communication with control and proof',
     benefits: [
-      'Onboard entire families via CSV in under 5 minutes',
-      'One-click emergency broadcasts with read receipts',
-      'Real-time analytics on engagement and form responses',
-      'Role-based access control for every staff member',
+      'Reach the right families fast — from daily notices to emergency broadcasts.',
+      'See who received, opened, and responded, so communication stops being guesswork.',
+      'Replace scattered chats and paper trails with one school-owned system.',
+      'Bring your whole school community onboard quickly and manage access by role.',
     ],
     accent: '#14B8A6',
     bg: '#F0FDFA',
@@ -104,12 +104,12 @@ const personas = [
   {
     role: 'Teachers',
     emoji: '👨‍🏫',
-    tagline: 'Focus on teaching, not administration',
+    tagline: 'Spend less time chasing responses',
     benefits: [
-      'Send targeted notices to your class in seconds',
-      'Create and distribute digital forms effortlessly',
-      'Track event RSVPs and form submissions live',
-      'Direct push notifications to parents via mobile app',
+      'Send class updates in seconds without managing side chats.',
+      'Collect forms, RSVPs, and confirmations in one place instead of on paper.',
+      'Keep parent communication structured, professional, and tied to the school.',
+      'Get faster responses because families receive updates where school communication belongs.',
     ],
     accent: '#F59E0B',
     bg: '#FFFBEB',
@@ -117,28 +117,15 @@ const personas = [
   {
     role: 'Parents',
     emoji: '👨‍👩‍👧',
-    tagline: 'Stay connected to your child\'s school life',
+    tagline: 'Know what matters without digging through chats',
     benefits: [
-      'Never miss an important announcement or event',
-      'Submit permission slips and consent forms digitally',
-      'Receive emergency alerts instantly on your phone',
-      'One app for all your children across any grade',
+      'Get important school updates in one trusted place.',
+      'Respond to forms, reminders, and event requests from your phone.',
+      'Stay ahead of emergencies, deadlines, and school events before they are missed.',
+      'Manage communication for more than one child from one account.',
     ],
     accent: '#8B5CF6',
     bg: '#F5F3FF',
-  },
-  {
-    role: 'School Staff',
-    emoji: '💼',
-    tagline: 'Stay aligned with the whole community',
-    benefits: [
-      'Access relevant notices and event updates instantly',
-      'Participate in school-wide emergency communications',
-      'Streamlined workflows for administrative tasks',
-      'Real-time visibility into form submission status',
-    ],
-    accent: '#EC4899',
-    bg: '#FDF2F8',
   },
 ];
 
@@ -306,12 +293,10 @@ export default function LandingPage() {
     <>
       {showModal && <RequestAccessModal onClose={() => setShowModal(false)} />}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700;800&display=swap');
-
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        .lp { font-family: 'Outfit', system-ui, sans-serif; color: #1C1917; overflow-x: hidden; }
-        .lp .serif { font-family: 'DM Serif Display', Georgia, serif; }
+        .lp { font-family: Outfit, system-ui, sans-serif; color: #1C1917; overflow-x: hidden; }
+        .lp .serif { font-family: DM Serif Display, Georgia, serif; }
 
         /* ── Hero gradient ── */
         .hero-bg {
@@ -460,7 +445,7 @@ export default function LandingPage() {
           cursor: pointer; white-space: nowrap;
           border: 1.5px solid transparent;
           transition: all 0.2s ease;
-          font-family: 'Outfit', sans-serif;
+          font-family: Outfit, sans-serif;
         }
         .p-tab-on  { background: #042F2E; color: #fff; border-color: #042F2E; }
         .p-tab-off { background: #fff; color: #57534E; border-color: #E8E8E0; }
@@ -475,7 +460,7 @@ export default function LandingPage() {
 
         /* ── Step number watermark ── */
         .step-wm {
-          font-family: 'DM Serif Display', Georgia, serif;
+          font-family: DM Serif Display, Georgia, serif;
           font-size: 100px; line-height: 1;
           color: rgba(20,184,166,0.1);
           position: absolute; top: -16px; left: -8px;
@@ -504,6 +489,18 @@ export default function LandingPage() {
         .btn-ghost-white,
         .p-tab {
           min-height: 44px;
+        }
+
+        /* M-5: nav link tap targets >= 24px */
+        .lp-nav-link { display: inline-flex; align-items: center; min-height: 24px; padding: 4px 2px; }
+
+        /* M-6: respect reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+          .lp *, .lp *::before, .lp *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+          }
         }
 
         /* ── Responsive layout ── */
@@ -606,13 +603,15 @@ export default function LandingPage() {
       `}</style>
 
       <div className="lp">
+        {/* M-3: main landmark for a11y/SEO */}
+        <main>
 
         {/* ────────────────────── NAV ────────────────────────────── */}
         <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? 'nav-dark' : ''}`}>
           <div className="lp-nav-inner" style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', height: 120, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 
-            {/* Logo */}
-            <a href="#" style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none' }}>
+            {/* Logo — L-1: links to top instead of dead "#"; picture serves WebP with PNG fallback */}
+            <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none' }}>
               <div className="lp-logo-mark" style={{
                 width: 96, height: 96, borderRadius: '50%',
                 overflow: 'hidden', flexShrink: 0,
@@ -620,11 +619,14 @@ export default function LandingPage() {
                 boxShadow: '0 0 0 4px rgba(45,212,191,0.1), 0 0 24px rgba(20,184,166,0.25)',
                 background: '#042F2E',
               }}>
-                <img src="/logo.png" alt="SkoConnect" style={{
-                  width: '100%', height: '100%',
-                  objectFit: 'cover',
-                  display: 'block',
-                }} />
+                <picture>
+                  <source srcSet="/logo.webp" type="image/webp" />
+                  <img src="/logo.png" alt="SkoConnect" style={{
+                    width: '100%', height: '100%',
+                    objectFit: 'cover',
+                    display: 'block',
+                  }} />
+                </picture>
               </div>
               <span className="lp-logo-word" style={{ color: '#fff', fontWeight: 700, fontSize: 26, letterSpacing: '-0.02em' }}>SkoConnect</span>
             </a>
@@ -632,7 +634,7 @@ export default function LandingPage() {
             {/* Links (desktop) */}
             <div style={{ display: 'flex', gap: 32 }} className="hidden md:flex">
               {['#features', '#for-schools', '#how-it-works', '#founder-vision'].map((href, i) => (
-                <a key={href} href={href} style={{ color: 'rgba(255,255,255,0.65)', fontSize: 14, fontWeight: 500, textDecoration: 'none', transition: 'color 0.2s' }}
+                <a key={href} href={href} className="lp-nav-link" style={{ color: 'rgba(255,255,255,0.65)', fontSize: 14, fontWeight: 500, textDecoration: 'none', transition: 'color 0.2s' }}
                   onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
                   onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.65)')}
                 >{['Features', 'For Schools', 'How It Works', "Founder's Vision"][i]}</a>
@@ -877,13 +879,13 @@ export default function LandingPage() {
 
             <div style={{ textAlign: 'center', marginBottom: 48 }}>
               <div style={{ display: 'inline-block', padding: '6px 16px', borderRadius: 100, background: '#FFFBEB', border: '1px solid #FEF3C7', color: '#B45309', fontSize: 13, fontWeight: 600, marginBottom: 16 }}>
-                For Everyone
+                For Schools
               </div>
               <h2 className="serif" style={{ fontSize: 'clamp(2rem,3.5vw,3rem)', lineHeight: 1.18, letterSpacing: '-0.025em', color: '#1C1917', marginBottom: 16 }}>
-                Built for your <em style={{ fontStyle: 'italic' }}>whole</em> community
+                Different roles. One <em style={{ fontStyle: 'italic' }}>accountable</em> communication system.
               </h2>
               <p style={{ color: '#78716C', fontSize: 17, lineHeight: 1.6, maxWidth: 560, margin: '0 auto' }}>
-                One platform with distinct experiences for every role in your school ecosystem.
+                SkoConnect gives school leaders control, teachers speed, and families clarity — without the chaos of WhatsApp groups, paper forms, and scattered follow-up.
               </p>
             </div>
 
@@ -1053,7 +1055,7 @@ export default function LandingPage() {
               Ready to transform your school?
             </h2>
             <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 18, lineHeight: 1.6, marginBottom: 44, maxWidth: 480, margin: '0 auto 44px' }}>
-              SkoConnect is live in production and on Google Play. The Free Pilot Program is free for participating schools — and new capabilities like two-way messaging roll out to pilot schools first as they clear app review. No credit card required, no automatic charges.
+              SkoConnect is live in production and on Google Play. The Free Pilot Program is available at no cost to participating schools during the pilot period. Pricing for full rollout will be shared before the pilot ends. No credit card required, and no school will be charged automatically. The mobile app is free to download, but access is activated through a school's subscription or pilot enrollment — families do not pay separately for the app.
             </p>
             <div className="final-cta-buttons" style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center', marginBottom: 20 }}>
               <button onClick={() => setShowModal(true)} className="btn-teal" style={{ display: 'inline-block', padding: '15px 32px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', background: '#0D9488', border: 'none', cursor: 'pointer', boxShadow: '0 4px 32px rgba(20,184,166,0.4)' }}>
@@ -1090,6 +1092,8 @@ export default function LandingPage() {
           </div>
         </section>
 
+        </main>
+
         {/* ────────────────────── FOOTER ─────────────────────────── */}
         <footer style={{ background: '#0C0A09', padding: '56px 24px 32px' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
@@ -1098,17 +1102,20 @@ export default function LandingPage() {
               {/* Brand */}
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-                  <img src="/logo.png" alt="SkoConnect" style={{ width: 32, height: 32, borderRadius: 8, objectFit: 'cover' }} />
+                  <picture>
+                    <source srcSet="/logo.webp" type="image/webp" />
+                    <img src="/logo.png" alt="SkoConnect" style={{ width: 32, height: 32, borderRadius: 8, objectFit: 'cover' }} />
+                  </picture>
                   <span style={{ color: '#fff', fontWeight: 700, fontSize: 17 }}>SkoConnect</span>
                 </div>
-                <p style={{ color: '#57534E', fontSize: 14, lineHeight: 1.65, maxWidth: 300 }}>
+                <p style={{ color: '#A8A29E', fontSize: 14, lineHeight: 1.65, maxWidth: 300 }}>
                   Transforming school communication with real-time announcements, digital forms, and smart notifications for the modern school community.
                 </p>
               </div>
 
               {/* Product */}
               <div>
-                <h4 style={{ color: '#fff', fontWeight: 600, fontSize: 13, marginBottom: 18 }}>Product</h4>
+                <h3 style={{ color: '#fff', fontWeight: 600, fontSize: 13, marginBottom: 18 }}>Product</h3>
                 <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 12 }}>
                   {[
                     { label: 'Features', href: '#features' },
@@ -1117,9 +1124,9 @@ export default function LandingPage() {
                     { label: 'Security', href: 'https://admin.skoconnect.com/security' },
                     { label: 'Pricing', href: 'mailto:info.skoconnect@agentmail.to?subject=Pricing%20Inquiry' },
                   ].map(l => (
-                    <li key={l.label}><a href={l.href} style={{ color: '#57534E', fontSize: 14, textDecoration: 'none', transition: 'color 0.2s' }}
+                    <li key={l.label}><a href={l.href} style={{ color: '#A8A29E', fontSize: 14, textDecoration: 'none', transition: 'color 0.2s' }}
                       onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-                      onMouseLeave={e => (e.currentTarget.style.color = '#57534E')}
+                      onMouseLeave={e => (e.currentTarget.style.color = '#A8A29E')}
                     >{l.label}</a></li>
                   ))}
                 </ul>
@@ -1127,7 +1134,7 @@ export default function LandingPage() {
 
               {/* Company */}
               <div>
-                <h4 style={{ color: '#fff', fontWeight: 600, fontSize: 13, marginBottom: 18 }}>Company</h4>
+                <h3 style={{ color: '#fff', fontWeight: 600, fontSize: 13, marginBottom: 18 }}>Company</h3>
                 <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 12 }}>
                   {[
                     { label: 'About', href: 'https://admin.skoconnect.com/about' },
@@ -1136,9 +1143,9 @@ export default function LandingPage() {
                     { label: 'Privacy Policy', href: 'https://admin.skoconnect.com/privacy' },
                     { label: 'Terms', href: 'https://admin.skoconnect.com/terms' },
                   ].map(l => (
-                    <li key={l.label}><a href={l.href} style={{ color: '#57534E', fontSize: 14, textDecoration: 'none', transition: 'color 0.2s' }}
+                    <li key={l.label}><a href={l.href} style={{ color: '#A8A29E', fontSize: 14, textDecoration: 'none', transition: 'color 0.2s' }}
                       onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-                      onMouseLeave={e => (e.currentTarget.style.color = '#57534E')}
+                      onMouseLeave={e => (e.currentTarget.style.color = '#A8A29E')}
                     >{l.label}</a></li>
                   ))}
                 </ul>
@@ -1146,10 +1153,10 @@ export default function LandingPage() {
             </div>
 
             <div style={{ borderTop: '1px solid #1C1917', paddingTop: 24, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
-              <p style={{ color: '#44403C', fontSize: 13 }}>© 2026 SkoConnect. All rights reserved.</p>
+              <p style={{ color: '#A8A29E', fontSize: 13 }}>© 2026 SkoConnect. All rights reserved.</p>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span style={{ color: '#44403C', fontSize: 12 }}>Hosted on Google Cloud Firebase infrastructure</span>
-                <span style={{ color: '#44403C' }}>·</span>
+                <span style={{ color: '#A8A29E', fontSize: 12 }}>Hosted on Google Cloud Firebase infrastructure</span>
+                <span style={{ color: '#A8A29E' }}>·</span>
                 <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, color: '#14B8A6' }}>
                   <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#14B8A6', display: 'inline-block', animation: 'pulseDot 2s ease-in-out infinite' }} />
                   All systems operational
