@@ -43,7 +43,7 @@ export default function AccountDeletionPage() {
           heading="Delete Your Account"
           description="This will permanently delete your SkoConnect account, including all associated data such as your profile, messages, and activity history. This action cannot be undone."
           confirmLabel="I confirm I want to permanently delete my SkoConnect account and all associated data."
-          successTimeline="Your request has been received. Your account and all associated data will be deleted within 14 business days."
+          successTimeline="Your request has been received. We will respond within 30 days as required by the Jamaica Data Protection Act; our internal target is to complete deletion within 14 business days of approval."
         />
       </div>
 

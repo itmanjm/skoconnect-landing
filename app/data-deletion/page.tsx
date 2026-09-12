@@ -43,7 +43,7 @@ export default function DataDeletionPage() {
           heading="Request Data Deletion"
           description="Request the deletion of your personal data stored by SkoConnect. This includes profile information, activity logs, and any other personally identifiable data we hold."
           confirmLabel="I confirm I want to delete my personal data from SkoConnect."
-          successTimeline="Your request has been received. We will process your data deletion request within 14 business days."
+          successTimeline="Your request has been received. We will respond within 30 days as required by the Jamaica Data Protection Act; our internal target is to complete deletion within 14 business days of approval."
         />
       </div>
 
