@@ -250,7 +250,7 @@ function RequestAccessModal({ onClose }: { onClose: () => void }) {
                 <p style={{ color: '#FCA5A5', fontSize: 13, padding: '10px 14px', background: 'rgba(220,38,38,0.15)', borderRadius: 8, border: '1px solid rgba(220,38,38,0.3)' }}>{errorMsg}</p>
               )}
               <button type="submit" disabled={status === 'submitting'} style={{ background: status === 'submitting' ? 'rgba(13,148,136,0.5)' : '#0D9488', color: '#fff', border: 'none', borderRadius: 10, padding: '13px 0', fontSize: 15, fontWeight: 700, cursor: status === 'submitting' ? 'not-allowed' : 'pointer', marginTop: 4 }}>
-                {status === 'submitting' ? 'Submitting…' : 'Request Access →'}
+                {status === 'submitting' ? 'Submitting…' : 'Start Your Free Pilot →'}
               </button>
               <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', textAlign: 'center' }}>No credit card required. The pilot program is free.</p>
             </form>
@@ -647,7 +647,7 @@ export default function LandingPage() {
               <a href="https://admin.skoconnect.com/login" style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14, fontWeight: 500, textDecoration: 'none' }}
                 className="hidden sm:block">Sign In</a>
               <button onClick={() => setShowModal(true)} className="btn-teal" style={{ padding: '10px 20px', borderRadius: 10, fontSize: 14, fontWeight: 600, color: '#fff', background: '#0D9488', border: 'none', cursor: 'pointer', display: 'inline-block' }}>
-                <span>Request Access →</span>
+                <span>Start Your Free Pilot →</span>
               </button>
             </div>
           </div>
@@ -691,8 +691,8 @@ export default function LandingPage() {
                   <button onClick={() => setShowModal(true)} className="btn-teal" style={{ padding: '14px 28px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', background: '#0D9488', border: 'none', cursor: 'pointer', display: 'inline-block' }}>
                     <span>Start Your Free Pilot →</span>
                   </button>
-                  <a href="https://admin.skoconnect.com/login" className="btn-ghost-white" style={{ padding: '14px 28px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', textDecoration: 'none', display: 'inline-block' }}>
-                    Sign In →
+                  <a href="#how-it-works" className="btn-ghost-white" style={{ padding: '14px 28px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', textDecoration: 'none', display: 'inline-block' }}>
+                    See How It Works
                   </a>
                 </div>
 
@@ -720,6 +720,7 @@ export default function LandingPage() {
                   {['🔒 Secure by design on Google Cloud', '☁️ Built on Google Cloud infrastructure', '📲 Now on Google Play', '✓ Free Pilot Program'].map(p => (
                     <span key={p} style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13, fontWeight: 500 }}>{p}</span>
                   ))}
+                  <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13, fontWeight: 500 }}>🔒 Compliant with Jamaica's Data Protection Act (2020).</span>
                 </div>
               </div>
 
@@ -907,9 +908,9 @@ export default function LandingPage() {
                   <div style={{ fontSize: 52, marginBottom: 16 }}>{personas[activePersona].emoji}</div>
                   <h3 className="serif" style={{ fontSize: 26, color: '#1C1917', marginBottom: 8 }}>{personas[activePersona].role}</h3>
                   <p style={{ fontSize: 15, color: '#78716C', marginBottom: 32 }}>{personas[activePersona].tagline}</p>
-                  <a href="https://admin.skoconnect.com/login" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '11px 22px', borderRadius: 10, fontSize: 14, fontWeight: 600, color: '#fff', textDecoration: 'none', background: personas[activePersona].accent }}>
-                    Sign In →
-                  </a>
+                  <button onClick={() => setShowModal(true)} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '11px 22px', borderRadius: 10, fontSize: 14, fontWeight: 600, color: '#fff', textDecoration: 'none', background: personas[activePersona].accent, border: 'none', cursor: 'pointer' }}>
+                    Start Your Free Pilot →
+                  </button>
                 </div>
                 <div style={{ padding: '44px 40px', background: `${personas[activePersona].bg}` }}>
                   <h4 style={{ fontSize: 11, fontWeight: 700, color: '#A8A29E', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 24 }}>Key Benefits</h4>
@@ -969,7 +970,7 @@ export default function LandingPage() {
 
             <div style={{ textAlign: 'center', marginTop: 56 }}>
               <button onClick={() => setShowModal(true)} className="btn-teal" style={{ display: 'inline-block', padding: '15px 32px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', background: '#0D9488', border: 'none', cursor: 'pointer' }}>
-                <span>Request Access →</span>
+                <span>Start Your Free Pilot →</span>
               </button>
             </div>
           </div>
@@ -1063,8 +1064,11 @@ export default function LandingPage() {
                 <span>Start Your Free Pilot →</span>
               </button>
               <button onClick={() => setShowModal(true)} className="btn-ghost-white" style={{ display: 'inline-block', padding: '15px 32px', borderRadius: 12, fontSize: 16, fontWeight: 600, color: '#fff', background: 'transparent', border: '1px solid rgba(255,255,255,0.3)', cursor: 'pointer' }}>
-                Request a Demo
+                Talk to the Founder — 15 min
               </button>
+              <p style={{ width: '100%', color: 'rgba(255,255,255,0.5)', fontSize: 13, lineHeight: 1.5 }}>
+                A quick call to see if SkoConnect fits your school. Response within one business day.
+              </p>
             </div>
             <div style={{ marginBottom: 28 }}>
               <a href="https://play.google.com/store/apps/details?id=com.skoconnect.skoconnect"
@@ -1123,7 +1127,7 @@ export default function LandingPage() {
                     { label: 'For Schools', href: '#for-schools' },
                     { label: 'Download App', href: 'https://play.google.com/store/apps/details?id=com.skoconnect.skoconnect' },
                     { label: 'Security', href: 'https://admin.skoconnect.com/security' },
-                    { label: 'Pricing', href: 'mailto:info.skoconnect@agentmail.to?subject=Pricing%20Inquiry' },
+                    { label: 'Free Pilot Program', href: 'mailto:info.skoconnect@agentmail.to?subject=Free%20Pilot%20Program' },
                   ].map(l => (
                     <li key={l.label}><a href={l.href} style={{ color: '#A8A29E', fontSize: 14, textDecoration: 'none', transition: 'color 0.2s' }}
                       onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
